@@ -77,7 +77,7 @@ return new Promise(function(resolve, reject) {
     const year = 365 * 24 * 60 * 60 * 1000;
     if(now - date >= year) {
       const years = (now - date) / year;
-      if(years == 1) {
+      if(years === 1) {
         return 'Fyrir 1 ári síðan';
       }
       return 'Fyrir '.concat(toString(years), ' árum síðan');
@@ -85,7 +85,7 @@ return new Promise(function(resolve, reject) {
     const month = 30 * 24 * 60 * 60 * 1000;
     if(now - date >= month) {
       const months = (now - date) / months;
-      if(months == 1) {
+      if(months === 1) {
         return "Fyrir 1 mánuði síðan";
       }
       return 'Fyrir '.concat(toString(months), ' mánuðum síðan');
@@ -93,25 +93,24 @@ return new Promise(function(resolve, reject) {
     const week = 7 * 24 * 60 * 60 * 1000;
     if(now - date >= week) {
       const weeks = (now - date) / week;
-      if(weeks == 1) {
-        return "Fyrir 1 viku síðan";
-      } else {
-        return "Fyrir " + to_string(weeks) + " vikum síðan";
+      if(weeks === 1) {
+        return 'Fyrir 1 viku síðan';
       }
+      return 'Fyrir '.concat(toString(weeks), ' vikum síðan');
     }
     const day = 24 * 60 * 60 * 1000;
     if(now - date > day) {
       const days = (now - date) / day;
-      if(days == 1) {
+      if(days === 1) {
         return 'Fyrir 1 degi síðan';
       }
       return 'Fyrir '.concat(toString(days), ' dögum síðan');
     }
     const hour = 60 * 60 * 1000;
     const hours = (now - date) / hour;
-    if(hours == 0) {
+    if(hours === 0) {
       return 'Fyrir minna en klukkustund síðan';
-    } else if(hours == 1) {
+    } else if(hours === 1) {
       return 'Fyrir 1 klukkustund síðan';
     }
     return 'Fyrir '.concat(toString(hours), ' klukkustundum síðan');
@@ -121,7 +120,7 @@ return new Promise(function(resolve, reject) {
   parseDur(duration) {
     const min = duration / 60;
     const sec = duration % 60;
-    return to_string(min) + ':' + to_string(sec);
+    return toString(min).concat(':', toString(sec));
   }
 
   // Fall sem býr til eitt div utan um vídeo með aldri, tíma, titli etc.
@@ -138,11 +137,11 @@ return new Promise(function(resolve, reject) {
 document.addEventListener('DOMContentLoaded', () => {
   const videos = new videosMainPage();
 
-  videos.load()
+  videos.load ()
   .then(function(result) {
     videos.proofOfConcept(result);
   })
-  .catch(function() {
+  .catch(function () {
     // Bregðast við villu hérna.
   });
 });
