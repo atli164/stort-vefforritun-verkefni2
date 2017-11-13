@@ -78,19 +78,17 @@ return new Promise(function(resolve, reject) {
     if(now - date >= year) {
       const years = (now - date) / year;
       if(years == 1) {
-        return "Fyrir 1 ári síðan";
-      } else {
-        return "Fyrir " + to_string(years) + " árum síðan";
+        return 'Fyrir 1 ári síðan';
       }
+      return 'Fyrir '.concat(toString(years), ' árum síðan');
     }
     const month = 30 * 24 * 60 * 60 * 1000;
     if(now - date >= month) {
       const months = (now - date) / months;
       if(months == 1) {
         return "Fyrir 1 mánuði síðan";
-      } else {
-        return "Fyrir " + to_string(months) + " mánuðum síðan";
       }
+      return 'Fyrir '.concat(toString(months), ' mánuðum síðan');
     }
     const week = 7 * 24 * 60 * 60 * 1000;
     if(now - date >= week) {
