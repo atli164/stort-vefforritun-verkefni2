@@ -1,4 +1,8 @@
 class VideosMainPage {
+  constructor() {
+    this.container = document.querySelector('body');
+  }
+    
   // Einhverskonar startup fall
   load() {
     // Dæmi um hvernig mætti nota hrátt callback. Skil eftir ef ske kynni
@@ -172,7 +176,7 @@ class VideosMainPage {
         const cv = videos[video];
         catBox.appendChild(this.createVideoElement(cv.id, cv.title, cv.length, cv.dur, cv.thumb));
       });
-      // Appenda catbox sem child í eitthvað aðaldiv hér
+      this.container.appendChild(catBox);
     });
   }
 }
