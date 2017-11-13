@@ -116,30 +116,27 @@ return new Promise(function(resolve, reject) {
       return "Fyrir minna en klukkustund síðan";
     } else if(hours == 1) {
       return "Fyrir 1 klukkustund síðan";
-    } else {
-      return "Fyrir " + to_string(hours) + " klukkustundum síðan";
     }
+    return 'Fyrir '.concat(toString(hours), ' klukkustundum síðan');
   }
 
-  //Fall sem tekur við duration of spýtir út lengdarstreng
+  // Fall sem tekur við duration of spýtir út lengdarstreng
   parseDur(duration) {
     const min = duration / 60;
     const sec = duration % 60;
     return to_string(min) + ':' + to_string(sec);
   }
 
-  //Fall sem býr til eitt div utan um vídeo með aldri, tíma, titli etc.
+  // Fall sem býr til eitt div utan um vídeo með aldri, tíma, titli etc.
   createVideoElement(id, title, dur, age, poster) {
 
   }
 
-  //Fall sem býr til div utan um myndbandsflokk, kallar í createVideoElement
+  // Fall sem býr til div utan um myndbandsflokk, kallar í createVideoElement
   createVideoCategory() {
 
   }
 }
-
-
 
 document.addEventListener('DOMContentLoaded', () => {
   const videos = new videosMainPage();
@@ -151,5 +148,4 @@ document.addEventListener('DOMContentLoaded', () => {
   .catch(function() {
     // Bregðast við villu hérna.
   });
-
-})
+});
