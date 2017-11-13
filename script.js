@@ -1,10 +1,8 @@
-class videosMainPage {
-
-  //Einhverskonar startup fall
+class VideosMainPage {
+  // Einhverskonar startup fall
   load() {
-
-    //Dæmi um hvernig mætti nota hrátt callback. Skil eftir ef ske kynni
-    //við vildum frekar nota það.
+    // Dæmi um hvernig mætti nota hrátt callback. Skil eftir ef ske kynni
+    // við vildum frekar nota það.
     /*  const request = new XMLHttpRequest();
       request.open('GET', 'videos.json', true);
       request.onload = function() {
@@ -25,49 +23,48 @@ class videosMainPage {
 
       */
 
-    //Dæmi #2 um hvernig hægt er að ná í JSON gögn með asynchronous hætti,
-    //í þetta sinn með promises. Aðeins ítarlegra en það sem ég endaði á að
-    //nota, skil það eftir ef við endum á að vilja frekar nota þessa aðferð.
-/*
-var request = new Request('videos.json', { method: 'GET' });
-fetch(request)
-  .then(function(response) {
-    if (response.status === 200) {
-      return response.json();
-    }
-    throw new Error('Something went wrong on api server!');
-  })
-  .then(function(response) {
-//    console.log(response);
-    return response;
-  })
-  .catch(function(error) {
-    console.error(error);
-  });
-*/
+    // Dæmi #2 um hvernig hægt er að ná í JSON gögn með asynchronous hætti,
+    // í þetta sinn með promises. Aðeins ítarlegra en það sem ég endaði á að
+    // nota, skil það eftir ef við endum á að vilja frekar nota þessa aðferð.
+    /*
+      var request = new Request('videos.json', { method: 'GET' });
+      fetch(request)
+        .then(function(response) {
+          if (response.status === 200) {
+            return response.json();
+          }
+          throw new Error('Something went wrong on api server!');
+        })
+        .then(function(response) {
+          // console.log(response);
+          return response;
+        })
+        .catch(function(error) {
+          console.error(error);
+        });
+     */
 
-return new Promise(function(resolve, reject) {
-   var xhr = new XMLHttpRequest();
-   xhr.onload = function() {
-     resolve(this.responseText);
-   };
-   xhr.onerror = reject;
-   xhr.open('GET', 'videos.json');
-   xhr.send();
- });
-
-}
-
-    //Throwaway fall til að sýna hvernig við náum gögnum úr asynchronous
-    //promise til að vinna svo með gögnin
-  proofOfConcept(parsedResults) {
-      //console.log(parsedResults);
-      this.proofTwo(parsedResults);
+    return new Promise(function (resolve, reject) {
+      const xhr = new XMLHttpRequest();
+      xhr.onload = function () {
+        resolve(this.responseText);
+      };
+      xhr.onerror = reject;
+      xhr.open('GET', 'videos.json');
+      xhr.send();
+    });
   }
 
-  //Annað throwaway til að sýna hvernig við hendum gögnum milli falla.
-  proofTwo(parse){
-      console.log(parse);
+  // Throwaway fall til að sýna hvernig við náum gögnum úr asynchronous
+  // promise til að vinna svo með gögnin
+  proofOfConcept(parsedResults) {
+    // console.log(parsedResults);
+    this.proofTwo(parsedResults);
+  }
+
+  // Annað throwaway til að sýna hvernig við hendum gögnum milli falla.
+  proofTwo(parse) {
+    console.log(parse);
   }
 
   // Fall sem tekur við created tíma og spýtir út aldursstreng
@@ -135,7 +132,7 @@ return new Promise(function(resolve, reject) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  const videos = new videosMainPage();
+  const videos = new VideosMainPage();
 
   videos.load()
     .then(function (result) {
