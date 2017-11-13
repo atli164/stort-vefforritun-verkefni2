@@ -119,11 +119,6 @@ class VideosMainPage {
     return toString(min).concat(':', toString(sec));
   }
 
-  // Fall sem tekur poster nafn og skilar valid location streng
-  parsePoster(poster) {
-
-  }
-
   // Fall sem býr til eitt div utan um vídeo með aldri, tíma, titli etc.
   // Kalla þarf á parseföll utan þess falls, þetta tekur við parsed gildum
   createVideoElement(title, dur, age, poster) {
@@ -160,7 +155,7 @@ class VideosMainPage {
       parsedObj.title = video.title;
       parsedObj.age = this.parseAge(video.created);
       parsedObj.length = this.parseDur(video.duration);
-      parsedObj.thumb = this.parsePoster(video.poster);
+      parsedObj.thumb = video.poster;
       videos[video.id] = parsedObj;
     });
     data.categories.forEach((category) => {
