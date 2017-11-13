@@ -165,9 +165,9 @@ class VideosMainPage {
       videos[video.id] = parsedObj;
     });
     data.categories.forEach((category) => {
-      const catBox = document.createElement('div');
+      const catBox = document.createElement('section');
       catBox.classList.add('videocat');
-      const catBoxTitle = document.createElement('p');
+      const catBoxTitle = document.createElement('h2');
       catBoxTitle.classList.add('videocat__title');
       const actualTitle = document.createTextNode(category.title);
       catBoxTitle.appendChild(actualTitle);
