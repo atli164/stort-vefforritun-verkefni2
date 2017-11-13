@@ -3,45 +3,72 @@ class videosMainPage {
   //Einhverskonar startup fall
   load() {
 
-      //let container = document.createElement('div');
-      //empty(container);
-      //container.appendChild(document.createTextNode('Sæki gögn...'));
-      //document.appendChild(this.container);
-
-
-      const request = new XMLHttpRequest();
-
+    //Dæmi um hvernig mætti nota hrátt callback. Skil eftir ef ske kynni
+    //við vildum frekar nota það.
+    /*  const request = new XMLHttpRequest();
       request.open('GET', 'videos.json', true);
       request.onload = function() {
         if (request.status >= 200 && request.status < 400) {
+
           const data = JSON.parse(request.response);
-
-         console.log(data);
-
-
+          console.log(data);
         } else {
           console.error('Villa', request);
-          //empty(container);
-          //container.appendChild(document.createTextNode('Villa kom upp'));
         }
       };
 
       request.onerror = function() {
         console.error('Óþekkt villa');
-        //empty(container);
-        //container.appendChild(document.createTextNode('Villa kom upp'));
       };
 
       request.send();
 
+      */
+
+    //Dæmi #2 um hvernig hægt er að ná í JSON gögn með asynchronous hætti,
+    //í þetta sinn með promises. Aðeins ítarlegra en það sem ég endaði á að
+    //nota, skil það eftir ef við endum á að vilja frekar nota þessa aðferð.
+/*
+var request = new Request('videos.json', { method: 'GET' });
+fetch(request)
+  .then(function(response) {
+    if (response.status === 200) {
+      return response.json();
     }
+    throw new Error('Something went wrong on api server!');
+  })
+  .then(function(response) {
+//    console.log(response);
+    return response;
+  })
+  .catch(function(error) {
+    console.error(error);
+  });
+*/
 
-    empty(el) {
-     while (el.firstChild) {
-       el.removeChild(el.firstChild);
-        }
-     }
+return new Promise(function(resolve, reject) {
+   var xhr = new XMLHttpRequest();
+   xhr.onload = function() {
+     resolve(this.responseText);
+   };
+   xhr.onerror = reject;
+   xhr.open('GET', 'videos.json');
+   xhr.send();
+ });
 
+}
+
+    //Throwaway fall til að sýna hvernig við náum gögnum úr asynchronous
+    //promise til að vinna svo með gögnin
+  proofOfConcept(parsedResults) {
+      //console.log(parsedResults);
+      this.proofTwo(parsedResults);
+  }
+
+  //Annað throwaway til að sýna hvernig við hendum gögnum milli falla.
+  proofTwo(parse){
+      console.log(parse);
+  }
 
   //Fall sem tekur við created tíma og spýtir út aldursstreng
   parseAge(created) {
@@ -108,12 +135,21 @@ class videosMainPage {
 
   //Fall sem býr til div utan um myndbandsflokk, kallar í createVideoElement
   createVideoCategory() {
-      console.log(data);
+
   }
 }
 
+
+
 document.addEventListener('DOMContentLoaded', () => {
   const videos = new videosMainPage();
-  //videosMainPage.load();
-  videos.load();
+
+  videos.load()
+  .then(function(result) {
+    videos.proofOfConcept(result);
+  })
+  .catch(function() {
+    // Bregðast við villu hérna.
+  });
+
 })
