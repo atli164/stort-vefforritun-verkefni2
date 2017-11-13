@@ -2,12 +2,19 @@ class VideosSubPage {
   constructor() {
     this.container = document.querySelector('body');
     [, this.id] = window.location.href.split('?id=');
+    // Hjálparbreyta til að vita hvenær overlay á að vera til staðar
+    this.playing = false;
   }
 
   // Einhverskonar startup fall
   // Má copya úr aðalskjali þegar það er til
   load() {
 
+  }
+    
+  // Hjálparfall sem togglar paused overlay
+  toggleOverlay() {
+  
   }
 
   // Aðalfall til að birta myndband ef það finnst
