@@ -105,17 +105,16 @@ return new Promise(function(resolve, reject) {
     if(now - date > day) {
       const days = (now - date) / day;
       if(days == 1) {
-        return "Fyrir 1 degi síðan";
-      } else {
-        return "Fyrir " + to_string(days) + " dögum síðan";
+        return 'Fyrir 1 degi síðan';
       }
+      return 'Fyrir '.concat(toString(days), ' dögum síðan');
     }
     const hour = 60 * 60 * 1000;
     const hours = (now - date) / hour;
     if(hours == 0) {
-      return "Fyrir minna en klukkustund síðan";
+      return 'Fyrir minna en klukkustund síðan';
     } else if(hours == 1) {
-      return "Fyrir 1 klukkustund síðan";
+      return 'Fyrir 1 klukkustund síðan';
     }
     return 'Fyrir '.concat(toString(hours), ' klukkustundum síðan');
   }
