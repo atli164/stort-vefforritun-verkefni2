@@ -158,9 +158,9 @@ class VideosMainPage {
     data.videos.forEach((video) => {
       const parsedObj = {};
       parsedObj.title = video.title;
-      parsedObj.age = parseAge(video.created);
-      parsedObj.length = parseDur(video.duration);
-      parsedObj.thumb = parsePoster(poster);
+      parsedObj.age = this.parseAge(video.created);
+      parsedObj.length = this.parseDur(video.duration);
+      parsedObj.thumb = this.parsePoster(video.poster);
       videos[video.id] = parsedObj;
     });
     data.categories.forEach((category) => {
@@ -173,9 +173,9 @@ class VideosMainPage {
       catBox.appendChild(catBoxTitle);
       category.videos.forEach((video) => {
         const cv = videos[video];
-        catBox.appendChild(createVideoElement(cv.title, cv.length, cv.dur, cv.thumb));
+        catBox.appendChild(this.createVideoElement(cv.title, cv.length, cv.dur, cv.thumb));
       });
-      //Appenda catbox sem child í eitthvað aðaldiv hér
+      // Appenda catbox sem child í eitthvað aðaldiv hér
     });
   }
 }
