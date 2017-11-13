@@ -70,47 +70,47 @@ return new Promise(function(resolve, reject) {
       console.log(parse);
   }
 
-  //Fall sem tekur við created tíma og spýtir út aldursstreng
+  // Fall sem tekur við created tíma og spýtir út aldursstreng
   parseAge(created) {
     const date = new Date(created);
     const now = new Date();
     const year = 365 * 24 * 60 * 60 * 1000;
-    if(now - date >= year) {
+    if (now - date >= year) {
       const years = (now - date) / year;
-      if(years === 1) {
+      if (years === 1) {
         return 'Fyrir 1 ári síðan';
       }
       return 'Fyrir '.concat(toString(years), ' árum síðan');
     }
     const month = 30 * 24 * 60 * 60 * 1000;
-    if(now - date >= month) {
-      const months = (now - date) / months;
-      if(months === 1) {
-        return "Fyrir 1 mánuði síðan";
+    if (now - date >= month) {
+      const months = (now - date) / month;
+      if (months === 1) {
+        return 'Fyrir 1 mánuði síðan';
       }
       return 'Fyrir '.concat(toString(months), ' mánuðum síðan');
     }
     const week = 7 * 24 * 60 * 60 * 1000;
-    if(now - date >= week) {
+    if (now - date >= week) {
       const weeks = (now - date) / week;
-      if(weeks === 1) {
+      if (weeks === 1) {
         return 'Fyrir 1 viku síðan';
       }
       return 'Fyrir '.concat(toString(weeks), ' vikum síðan');
     }
     const day = 24 * 60 * 60 * 1000;
-    if(now - date > day) {
+    if (now - date > day) {
       const days = (now - date) / day;
-      if(days === 1) {
+      if (days === 1) {
         return 'Fyrir 1 degi síðan';
       }
       return 'Fyrir '.concat(toString(days), ' dögum síðan');
     }
     const hour = 60 * 60 * 1000;
     const hours = (now - date) / hour;
-    if(hours === 0) {
+    if (hours === 0) {
       return 'Fyrir minna en klukkustund síðan';
-    } else if(hours === 1) {
+    } else if (hours === 1) {
       return 'Fyrir 1 klukkustund síðan';
     }
     return 'Fyrir '.concat(toString(hours), ' klukkustundum síðan');
@@ -137,11 +137,11 @@ return new Promise(function(resolve, reject) {
 document.addEventListener('DOMContentLoaded', () => {
   const videos = new videosMainPage();
 
-  videos.load ()
-  .then(function(result) {
-    videos.proofOfConcept(result);
-  })
-  .catch(function () {
-    // Bregðast við villu hérna.
-  });
+  videos.load()
+    .then(function (result) {
+      videos.proofOfConcept(result);
+    })
+    .catch(function () {
+      // Bregðast við villu hérna.
+    });
 });
