@@ -119,9 +119,36 @@ class VideosMainPage {
     return toString(min).concat(':', toString(sec));
   }
 
-  // Fall sem býr til eitt div utan um vídeo með aldri, tíma, titli etc.
-  createVideoElement(id, title, dur, age, poster) {
+  // Fall sem tekur poster nafn og skilar valid location streng
+  parsePoster(poster) {
 
+  }
+
+  // Fall sem býr til eitt div utan um vídeo með aldri, tíma, titli etc.
+  // Kalla þarf á parseföll utan þess falls, þetta tekur við parsed gildum
+  createVideoElement(title, dur, age, poster) {
+    const newbox = document.createElement('div');
+    newbox.classList.add('videobox');
+    const thumb = document.createElement('img');
+    thumb.classList.add('videobox__img');
+    thumb.src = poster;
+    newbox.appendChild(thumb);
+    const ptime = document.createElement('p');
+    ptime.classList.add('videobox__time');
+    const ptimetext = document.createTextNode(dur);
+    ptime.appendChild(ptimetext);
+    newbox.appendChild(ptime);
+    const ptitle = document.createElement('p');
+    ptitle.classList.add('videobox__title');
+    const ptitletext = document.createTextNode(title);
+    ptitle.appendChild(ptitletext);
+    newbox.appendChild(ptitle);
+    const page = document.createElement('p');
+    page.classList.add('videobox__age');
+    const pagetext = document.createTextNode(age);
+    page.appendChild(pagetext);
+    newbox.appendChild(page);
+    return newbox;
   }
 
   //Fall sem býr til div utan um myndbandsflokk, kallar í createVideoElement
