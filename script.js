@@ -43,9 +43,9 @@ class VideosMainPage {
         });
      */
 
-    return new Promise(function (resolve, reject) {
+    return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
-      xhr.onload = function () {
+      xhr.onload = () => {
         resolve(JSON.parse(this.response));
       };
       xhr.onerror = reject;
@@ -158,7 +158,7 @@ class VideosMainPage {
 
   // Grunnfall sem tekur þáttað inntak úr JSON skránni og fer að deila því
   // út í myndbandsflokka og einstaka vídeó.
-  parse(data){
+  parse(data) {
     // console.log(data);
     data.categories.forEach(this.createVideoCategory);
   }
@@ -168,11 +168,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const videos = new VideosMainPage();
 
   videos.load()
-    .then(function (result) {
+    .then((result) => {
       // videos.proofOfConcept(result);
       videos.parse(result);
     })
-    .catch(function () {
+    .catch(() => {
       // Bregðast við villu hérna.
     });
 });
