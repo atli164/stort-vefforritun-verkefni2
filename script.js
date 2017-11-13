@@ -159,7 +159,7 @@ class VideosMainPage {
       videos[video.id] = parsedObj;
     });
     data.categories.forEach((category) => {
-      const catBox = document.createElement('div');
+      const catBox = document.createElement('a');
       catBox.classList.add('videocat');
       const catBoxTitle = document.createElement('p');
       catBoxTitle.classList.add('videocat__title');
