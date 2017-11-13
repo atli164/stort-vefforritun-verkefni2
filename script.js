@@ -151,16 +151,32 @@ class VideosMainPage {
     return newbox;
   }
 
-  // Fall sem býr til div utan um myndbandsflokk, kallar í createVideoElement
-  createVideoCategory(category) {
-    console.log(category);
-  }
-
-  // Grunnfall sem tekur þáttað inntak úr JSON skránni og fer að deila því
+  // Grunnfall sem tekur parsaða JSON skrána og fer að deila því
   // út í myndbandsflokka og einstaka vídeó.
   parse(data) {
-    // console.log(data);
-    data.categories.forEach(this.createVideoCategory);
+    const videos = {};
+    data.videos.forEach((video) => {
+      const parsedObj = {};
+      parsedObj.title = video.title;
+      parsedObj.age = parseAge(video.created);
+      parsedObj.length = parseDur(video.duration);
+      parsedObj.thumb = parsePoster(poster);
+      videos[video.id] = parsedObj;
+    });
+    data.categories.forEach((category) => {
+      const catBox = document.createElement('div');
+      catBox.classList.add('videocat');
+      const catBoxTitle = document.createElement('p');
+      catBoxTitle.classList.add('videocat__title');
+      const actualTitle = document.createTextNode(category.title);
+      catBoxTitle.appendChild(actualTitle);
+      catBox.appendChild(catBoxTitle);
+      category.videos.forEach((video) => {
+        const cv = videos[video];
+        catBox.appendChild(createVideoElement(cv.title, cv.length, cv.dur, cv.thumb));
+      });
+      //Appenda catbox sem child í eitthvað aðaldiv hér
+    });
   }
 }
 
