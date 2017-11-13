@@ -49,7 +49,7 @@ fetch(request)
 return new Promise(function(resolve, reject) {
    var xhr = new XMLHttpRequest();
    xhr.onload = function() {
-     resolve(this.responseText);
+     resolve(JSON.parse(this.response));
    };
    xhr.onerror = reject;
    xhr.open('GET', 'videos.json');
@@ -134,7 +134,15 @@ return new Promise(function(resolve, reject) {
   }
 
   //Fall sem býr til div utan um myndbandsflokk, kallar í createVideoElement
-  createVideoCategory() {
+  createVideoCategory(category) {
+      console.log(category);
+  }
+
+  //Grunnfall sem tekur þáttað inntak úr JSON skránni og fer að deila því
+  //út í myndbandsflokka og einstaka vídeó.
+  parse(data){
+    //console.log(data);
+    data.categories.forEach(this.createVideoCategory);
 
   }
 }
@@ -146,7 +154,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   videos.load()
   .then(function(result) {
-    videos.proofOfConcept(result);
+    //videos.proofOfConcept(result);
+    videos.parse(result);
   })
   .catch(function() {
     // Bregðast við villu hérna.
