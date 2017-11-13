@@ -2,7 +2,7 @@ class VideosMainPage {
   constructor() {
     this.container = document.querySelector('body');
   }
-    
+
   // Einhverskonar startup fall
   load() {
     // Dæmi um hvernig mætti nota hrátt callback. Skil eftir ef ske kynni

@@ -4,7 +4,7 @@
   "description": "",
   "main": "scripts.js",
   "scripts": {
-    "eslint": "eslint script.js videoscript.js",
+    "eslint": "eslint scripts/script.js scripts/videoscript.js",
     "stylelint": "stylelint *.scss scss/*.scss --syntax scss",
     "lint": "npm-run-all --parallel eslint stylelint",
     "babel": "babel scripts/ --watch --out-dir compiled_scripts/ --source-maps",

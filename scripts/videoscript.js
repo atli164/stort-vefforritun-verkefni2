@@ -1,18 +1,19 @@
-class videosSubPage {
+class VideosSubPage {
   constructor() {
     this.container = document.querySelector('body');
-    this.id = window.location.href.split('?id=')[1];
+    [, this.id] = window.location.href.split('?id=');
   }
-  
+
   // Einhverskonar startup fall
   // Má copya úr aðalskjali þegar það er til
   load() {
-  
+
   }
-  
+
   // Aðalfall til að birta myndband ef það finnst
-  display() {
-  
+  // Inntak er source á vídeói
+  display(src) {
+
   }
 
   // Fall sem birt er ef ekki tekst að ná í videos.json
@@ -33,7 +34,7 @@ class videosSubPage {
 
 document.addEventListener('DOMContentLoaded', () => {
   const video = new VideosSubPage();
-  //video.load()
+  // video.load()
   // E-ð dót sem má copya úr aðalskjali seinna
-})
+});
 
