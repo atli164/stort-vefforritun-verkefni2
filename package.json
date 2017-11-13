@@ -4,10 +4,10 @@
   "description": "",
   "main": "scripts.js",
   "scripts": {
-    "eslint": "eslint script.js",
+    "eslint": "eslint script.js videoscript.js",
     "stylelint": "stylelint *.scss scss/*.scss --syntax scss",
     "lint": "npm-run-all --parallel eslint stylelint",
-    "babel": "babel script.js --watch --out-file script-compiled.js --source-maps",
+    "babel": "babel scripts/ --watch --out-dir compiled_scripts/ --source-maps",
     "browser-sync": "browser-sync start --server --files index.html styles.css script-compiled.js",
     "sass": "node-sass --source-map-embed --watch styles.scss styles.css",
     "dev": "npm-run-all --parallel sass babel browser-sync"
