@@ -121,9 +121,10 @@ class VideosMainPage {
 
   // Fall sem býr til eitt div utan um vídeo með aldri, tíma, titli etc.
   // Kalla þarf á parseföll utan þess falls, þetta tekur við parsed gildum
-  createVideoElement(title, dur, age, poster) {
-    const newbox = document.createElement('div');
+  createVideoElement(id, title, dur, age, poster) {
+    const newbox = document.createElement('a');
     newbox.classList.add('videobox');
+    newbox.href = '/video.html/?id='.concat(toString(id));
     const thumb = document.createElement('img');
     thumb.classList.add('videobox__img');
     thumb.src = poster;
@@ -152,6 +153,7 @@ class VideosMainPage {
     const videos = {};
     data.videos.forEach((video) => {
       const parsedObj = {};
+      parsedObj.id = video.id;
       parsedObj.title = video.title;
       parsedObj.age = this.parseAge(video.created);
       parsedObj.length = this.parseDur(video.duration);
@@ -159,7 +161,7 @@ class VideosMainPage {
       videos[video.id] = parsedObj;
     });
     data.categories.forEach((category) => {
-      const catBox = document.createElement('a');
+      const catBox = document.createElement('div');
       catBox.classList.add('videocat');
       const catBoxTitle = document.createElement('p');
       catBoxTitle.classList.add('videocat__title');
@@ -168,7 +170,7 @@ class VideosMainPage {
       catBox.appendChild(catBoxTitle);
       category.videos.forEach((video) => {
         const cv = videos[video];
-        catBox.appendChild(this.createVideoElement(cv.title, cv.length, cv.dur, cv.thumb));
+        catBox.appendChild(this.createVideoElement(cv.id, cv.title, cv.length, cv.dur, cv.thumb));
       });
       // Appenda catbox sem child í eitthvað aðaldiv hér
     });
