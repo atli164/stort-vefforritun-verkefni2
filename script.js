@@ -20,8 +20,7 @@ class VideosMainPage {
       };
 
       request.send();
-
-      */
+    */
 
     // Dæmi #2 um hvernig hægt er að ná í JSON gögn með asynchronous hætti,
     // í þetta sinn með promises. Aðeins ítarlegra en það sem ég endaði á að
