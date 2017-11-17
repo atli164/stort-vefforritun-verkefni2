@@ -182,7 +182,7 @@ var VideosMainPage = function () {
     value: function createVideoElement(id, title, dur, age, poster) {
       var newbox = document.createElement('a');
       newbox.classList.add('videobox');
-      newbox.href = '/video.html/?id='.concat(toString(id));
+      newbox.href = '/video.html?id='.concat(id.toString());
       var thumb = document.createElement('img');
       thumb.classList.add('videobox__img');
       thumb.src = poster;
