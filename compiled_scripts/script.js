@@ -56,17 +56,15 @@ var VideosMainPage = function () {
           });
        */
 
-      //Þessi arrow function virðist virka ...
       return new Promise(function (resolve, reject) {
-        //return new Promise(function (resolve, reject) {
-
         var xhr = new XMLHttpRequest();
-
-        //...en þessi arrow function brýtur hleðslu á JSON, mögulega eitthvað
-        //að gera með scope á this í this.response (sem arrow functions hræra í)
-        //xhr.onload = () => {
-
-        //Notum lambda tímabundið í staðinn.
+        //Búum til private breytu sem geymir rétt scope á this...
+        //const that = this;
+        //console.log(that);
+        //...sendum svo hana í onload og notum hana í JSON.parse
+        //xhr.onload = (that) => {
+        //Virkaði samt ekki án þess að kasta villu í npm. Notum lambda fall
+        //rétt á meðan við erum að klára aðra virkni.
         xhr.onload = function () {
           resolve(JSON.parse(this.response));
         };
@@ -104,43 +102,53 @@ var VideosMainPage = function () {
       var year = 365 * 24 * 60 * 60 * 1000;
       if (now - date >= year) {
         var years = (now - date) / year;
-        if (years === 1) {
+        //Kippti út years === 1 svo Math.floor(years) skili ekki áfram 1
+        //ef við erum í t.d. 1.9999.
+        //(Það er alveg til umræðu hvort við viljum vera að rúnna niður með
+        //Math.floor() yfirhöfuð; mér finnst það eðlilegast og tel það gera fyrir
+        //sem einfaldastan kóða, en við gætum farið aðrar leiðir)
+        if (years >= 1 && years < 2) {
           return 'Fyrir 1 ári síðan';
         }
-        return 'Fyrir '.concat(toString(years), ' árum síðan');
+        var yearsRounded = Math.floor(years);
+        return 'Fyrir '.concat(yearsRounded.toString(), ' árum síðan');
       }
       var month = 30 * 24 * 60 * 60 * 1000;
       if (now - date >= month) {
         var months = (now - date) / month;
-        if (months === 1) {
+        if (months >= 1 && months < 2) {
           return 'Fyrir 1 mánuði síðan';
         }
-        return 'Fyrir '.concat(toString(months), ' mánuðum síðan');
+        var monthsRounded = Math.floor(months);
+        return 'Fyrir '.concat(monthsRounded.toString(), ' mánuðum síðan');
       }
       var week = 7 * 24 * 60 * 60 * 1000;
       if (now - date >= week) {
         var weeks = (now - date) / week;
-        if (weeks === 1) {
+        if (weeks >= 1 && weeks < 2) {
           return 'Fyrir 1 viku síðan';
         }
-        return 'Fyrir '.concat(toString(weeks), ' vikum síðan');
+        var weeksRounded = Math.floor(weeks);
+        return 'Fyrir '.concat(weeksRounded.toString(), ' vikum síðan');
       }
       var day = 24 * 60 * 60 * 1000;
       if (now - date > day) {
         var days = (now - date) / day;
-        if (days === 1) {
+        if (days >= 1 && days < 2) {
           return 'Fyrir 1 degi síðan';
         }
-        return 'Fyrir '.concat(toString(days), ' dögum síðan');
+        var daysRounded = Math.floor(days);
+        return 'Fyrir '.concat(daysRounded.toString(), ' dögum síðan');
       }
       var hour = 60 * 60 * 1000;
       var hours = (now - date) / hour;
-      if (hours === 0) {
+      if (hours < 1) {
         return 'Fyrir minna en klukkustund síðan';
-      } else if (hours === 1) {
+      } else if (hours >= 1 && hours < 2) {
         return 'Fyrir 1 klukkustund síðan';
       }
-      return 'Fyrir '.concat(toString(hours), ' klukkustundum síðan');
+      var hoursRounded = Math.floor(hours);
+      return 'Fyrir '.concat(hoursRounded.toString(), ' klukkustundum síðan');
     }
 
     // Fall sem tekur við duration of spýtir út lengdarstreng
