@@ -136,9 +136,22 @@ class VideosMainPage {
 
   // Fall sem tekur við duration of spýtir út lengdarstreng
   parseDur(duration) {
+    //Mögulegt TODO: Bæta við klukkustundarreikningi og viðeigandi return skipun.
     const min = duration / 60;
     const sec = duration % 60;
-    return toString(min).concat(':', toString(sec));
+    //Já, við gætum gert þetta allt með
+    // return min.toString().concat(':', sec.toString());
+    //en mér er illa við að keyra þrjú föll innan í return setningu - það
+    //leiðir til scope loss og undefined skemmtilegheita.
+    //Tek þetta frekar í sundur fyrir aðeins læsilegri og áreiðanlegri kóða.
+    const minRounded = Math.floor(min);
+    const minString = minRounded.toString();
+    const secRounded = Math.floor(sec);
+    const secString = secRounded.toString();
+    if(secRounded <= 9) {
+        return minString + ':0' + secRounded;
+    }
+    return minString + ':' + secRounded;
   }
 
   // Fall sem býr til eitt div utan um vídeo með aldri, tíma, titli etc.

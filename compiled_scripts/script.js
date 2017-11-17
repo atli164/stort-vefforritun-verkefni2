@@ -156,9 +156,22 @@ var VideosMainPage = function () {
   }, {
     key: 'parseDur',
     value: function parseDur(duration) {
+      //Mögulegt TODO: Bæta við klukkustundarreikningi og viðeigandi return skipun.
       var min = duration / 60;
       var sec = duration % 60;
-      return toString(min).concat(':', toString(sec));
+      //Já, við gætum gert þetta allt með
+      // return min.toString().concat(':', sec.toString());
+      //en mér er illa við að keyra þrjú föll innan í return setningu - það
+      //leiðir til scope loss og undefined skemmtilegheita.
+      //Tek þetta frekar í sundur fyrir aðeins læsilegri og áreiðanlegri kóða.
+      var minRounded = Math.floor(min);
+      var minString = minRounded.toString();
+      var secRounded = Math.floor(sec);
+      var secString = secRounded.toString();
+      if (secRounded <= 9) {
+        return minString + ':0' + secRounded;
+      }
+      return minString + ':' + secRounded;
     }
 
     // Fall sem býr til eitt div utan um vídeo með aldri, tíma, titli etc.
