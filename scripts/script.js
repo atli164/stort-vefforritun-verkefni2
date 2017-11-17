@@ -197,7 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
   videos.load()
     .then((result) => {
       // videos.proofOfConcept(result);
-      console.log(result);
+      //console.log(result);
       videos.parse(result);
     })
     .catch(() => {

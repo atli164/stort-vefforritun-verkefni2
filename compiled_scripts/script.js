@@ -228,7 +228,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   videos.load().then(function (result) {
     // videos.proofOfConcept(result);
-    console.log(result);
+    //console.log(result);
     videos.parse(result);
   }).catch(function () {
     // Bregðast við villu hérna.
