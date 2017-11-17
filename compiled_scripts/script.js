@@ -7,31 +7,32 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var VideosMainPage = function () {
   function VideosMainPage() {
     _classCallCheck(this, VideosMainPage);
+
+    this.container = document.querySelector('body');
   }
+
+  // Einhverskonar startup fall
+
 
   _createClass(VideosMainPage, [{
     key: 'load',
-
-    // Einhverskonar startup fall
     value: function load() {
-      var _this = this;
-
       // Dæmi um hvernig mætti nota hrátt callback. Skil eftir ef ske kynni
       // við vildum frekar nota það.
       /*  const request = new XMLHttpRequest();
         request.open('GET', 'videos.json', true);
         request.onload = function() {
           if (request.status >= 200 && request.status < 400) {
-             const data = JSON.parse(request.response);
+              const data = JSON.parse(request.response);
             console.log(data);
           } else {
             console.error('Villa', request);
           }
         };
-         request.onerror = function() {
+          request.onerror = function() {
           console.error('Óþekkt villa');
         };
-         request.send();
+          request.send();
       */
 
       // Dæmi #2 um hvernig hægt er að ná í JSON gögn með asynchronous hætti,
@@ -55,10 +56,19 @@ var VideosMainPage = function () {
           });
        */
 
+      //Þessi arrow function virðist virka ...
       return new Promise(function (resolve, reject) {
+        //return new Promise(function (resolve, reject) {
+
         var xhr = new XMLHttpRequest();
+
+        //...en þessi arrow function brýtur hleðslu á JSON, mögulega eitthvað
+        //að gera með scope á this í this.response (sem arrow functions hræra í)
+        //xhr.onload = () => {
+
+        //Notum lambda tímabundið í staðinn.
         xhr.onload = function () {
-          resolve(JSON.parse(_this.response));
+          resolve(JSON.parse(this.response));
         };
         xhr.onerror = reject;
         xhr.open('GET', 'videos.json');
@@ -180,31 +190,32 @@ var VideosMainPage = function () {
   }, {
     key: 'parse',
     value: function parse(data) {
-      var _this2 = this;
+      var _this = this;
 
       var videos = {};
       data.videos.forEach(function (video) {
         var parsedObj = {};
         parsedObj.id = video.id;
         parsedObj.title = video.title;
-        parsedObj.age = _this2.parseAge(video.created);
-        parsedObj.length = _this2.parseDur(video.duration);
+        parsedObj.age = _this.parseAge(video.created);
+        parsedObj.length = _this.parseDur(video.duration);
         parsedObj.thumb = video.poster;
         videos[video.id] = parsedObj;
       });
       data.categories.forEach(function (category) {
-        var catBox = document.createElement('div');
+        var catBox = document.createElement('section');
         catBox.classList.add('videocat');
-        var catBoxTitle = document.createElement('p');
+        var catBoxTitle = document.createElement('h2');
         catBoxTitle.classList.add('videocat__title');
         var actualTitle = document.createTextNode(category.title);
         catBoxTitle.appendChild(actualTitle);
         catBox.appendChild(catBoxTitle);
         category.videos.forEach(function (video) {
           var cv = videos[video];
-          catBox.appendChild(_this2.createVideoElement(cv.id, cv.title, cv.length, cv.dur, cv.thumb));
+          catBox.appendChild(_this.createVideoElement(cv.id, cv.title, cv.length, cv.dur, cv.thumb));
         });
-        // Appenda catbox sem child í eitthvað aðaldiv hér
+
+        _this.container.appendChild(catBox);
       });
     }
   }]);
@@ -217,6 +228,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   videos.load().then(function (result) {
     // videos.proofOfConcept(result);
+    console.log(result);
     videos.parse(result);
   }).catch(function () {
     // Bregðast við villu hérna.

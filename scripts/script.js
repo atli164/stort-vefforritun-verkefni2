@@ -47,9 +47,18 @@ class VideosMainPage {
         });
      */
 
+    //Þessi arrow function virðist virka ...
     return new Promise((resolve, reject) => {
+    //return new Promise(function (resolve, reject) {
+
       const xhr = new XMLHttpRequest();
-      xhr.onload = () => {
+
+      //...en þessi arrow function brýtur hleðslu á JSON, mögulega eitthvað
+      //að gera með scope á this í this.response (sem arrow functions hræra í)
+      //xhr.onload = () => {
+
+      //Notum lambda tímabundið í staðinn.
+      xhr.onload = function() {
         resolve(JSON.parse(this.response));
       };
       xhr.onerror = reject;
@@ -176,6 +185,7 @@ class VideosMainPage {
         const cv = videos[video];
         catBox.appendChild(this.createVideoElement(cv.id, cv.title, cv.length, cv.dur, cv.thumb));
       });
+
       this.container.appendChild(catBox);
     });
   }
@@ -187,6 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
   videos.load()
     .then((result) => {
       // videos.proofOfConcept(result);
+      console.log(result);
       videos.parse(result);
     })
     .catch(() => {
