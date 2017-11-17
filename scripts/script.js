@@ -47,19 +47,14 @@ class VideosMainPage {
         });
      */
 
-    //Þessi arrow function virðist virka ...
+
     return new Promise((resolve, reject) => {
-    //return new Promise(function (resolve, reject) {
-
       const xhr = new XMLHttpRequest();
-
-      //...en þessi arrow function brýtur hleðslu á JSON, mögulega eitthvað
-      //að gera með scope á this í this.response (sem arrow functions hræra í)
-      //xhr.onload = () => {
-
-      //Notum lambda tímabundið í staðinn.
-      xhr.onload = function() {
-        resolve(JSON.parse(this.response));
+      //Búum til private breytu sem geymir rétt scope á this...
+      const ._that = this;
+      //...sendum svo hana í onload og notum hana í JSON.parse
+      xhr.onload = (._that) => {
+          resolve(JSON.parse(._that.response));
       };
       xhr.onerror = reject;
       xhr.open('GET', 'videos.json');
