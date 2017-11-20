@@ -1,0 +1,19 @@
+.videobox {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: #fff;
+
+  &__img {
+    height: 100%;
+  }
+
+  &__title {
+    font-weight: bold;
+  }
+        
+  &__time {
+    background-color: rgba(0, 0, 0, 0.7);
+    margin-top: -2em;
+  }
+}

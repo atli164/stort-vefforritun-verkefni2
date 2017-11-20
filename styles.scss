@@ -1,7 +1,3 @@
-html { /* stylelint-disable-line */
-  box-sizing: border-box;
-}
-
 *, *:before, *:after { /* stylelint-disable-line */
   box-sizing: inherit;
 
@@ -10,20 +6,14 @@ html { /* stylelint-disable-line */
 }
 
 html { /* stylelint-disable-line */
+  background-color: rgba(0, 0, 0, 0.5);
+  box-sizing: border-box;
   font-family: helvetica, arial, sans-serif;
   font-size: 16px;
   line-height: 1.5;
-}
-
-main { /* stylelint-disable-line */
-  display: flex;
   max-width: 1200px;
   padding: 20px;
   margin: 0 auto;
-}
-
-h1 { /* stylelint-disable-line */
-  text-align: center;
 }
 
 @import "scss/controls";
