@@ -1,5 +1,5 @@
 /node_modules
 package-lock.json
-styles.scss
+styles.css
 script-compiled.js
 script-compiled.js.map
