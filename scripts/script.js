@@ -202,12 +202,11 @@ class VideosMainPage {
       catBoxTitle.classList.add('videocat__title');
       const actualTitle = document.createTextNode(category.title);
       catBoxTitle.appendChild(actualTitle);
-      catBox.appendChild(catBoxTitle);
       category.videos.forEach((video) => {
         const cv = videos[video];
-        catBox.appendChild(this.createVideoElement(cv.id, cv.title, cv.length, cv.dur, cv.thumb));
+        catBox.appendChild(this.createVideoElement(cv.id, cv.title, cv.length, cv.age, cv.thumb));
       });
-
+      this.container.appendChild(catBoxTitle);
       this.container.appendChild(catBox);
     });
   }
