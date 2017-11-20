@@ -230,12 +230,11 @@ var VideosMainPage = function () {
         catBoxTitle.classList.add('videocat__title');
         var actualTitle = document.createTextNode(category.title);
         catBoxTitle.appendChild(actualTitle);
-        catBox.appendChild(catBoxTitle);
         category.videos.forEach(function (video) {
           var cv = videos[video];
-          catBox.appendChild(_this.createVideoElement(cv.id, cv.title, cv.length, cv.dur, cv.thumb));
+          catBox.appendChild(_this.createVideoElement(cv.id, cv.title, cv.length, cv.age, cv.thumb));
         });
-
+        _this.container.appendChild(catBoxTitle);
         _this.container.appendChild(catBox);
       });
     }
