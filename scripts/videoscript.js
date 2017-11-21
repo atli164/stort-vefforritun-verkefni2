@@ -2,8 +2,6 @@ class VideosSubPage {
   constructor() {
     this.container = document.querySelector('body');
     [, this.id] = window.location.href.split('?id=');
-    // Hjálparbreyta til að vita hvenær overlay á að vera til staðar
-    this.playing = false;
   }
 
   // Einhverskonar startup fall
@@ -41,11 +39,6 @@ class VideosSubPage {
 
   }
 
-  // Hjálparfall sem togglar paused overlay
-  toggleOverlay() {
-
-  }
-
   // Aðalfall til að birta myndband ef það finnst
   // Inntak er source á vídeói
   // HD: Breytti aðeins. Við þurfum að birta titil, poster ofl.,
@@ -77,11 +70,11 @@ class VideosSubPage {
 //þarf CSS stílbrögð sem ákveða hvað sést og hvað ekki.
 /*
           const newPoster = document.createElement('img');
-          newPoster.classlist.add('overlay');
+          newPoster.classList.add('overlay');
           newPoster.src = src.poster;
           newVideo.appendChild(newPoster);
           const newPlayButton = document.createElement('img');
-          newPlayButton.classlist.add('overlay__play');
+          newPlayButton.classList.add('overlay__play');
           //Varúð, harðkóðað. Gætum líka þurft að parsa .svg skrána eitthvað
           newPlayButton.src = './images/play.svg';
           newVideo.appendChild(newPlayButton);
@@ -93,6 +86,7 @@ class VideosSubPage {
           newControlDiv.classList.add('controls');
 
           const newButtonRewind = document.createElement('button');
+          newButtonRewind.classList.add('controls__button');
           newButtonRewind.id = 'rewind';
           const newButtonRewindImage = document.createElement('img');
           newButtonRewindImage.src = './images/back.svg';
@@ -109,6 +103,7 @@ class VideosSubPage {
           });
 
           const newButtonPlay = document.createElement('button');
+          newButtonPlay.classList.add('controls__button');
           newButtonPlay.id = 'playpause';
           const newButtonPlayImage = document.createElement('img');
           newButtonPlayImage.src = './images/play.svg';
@@ -127,6 +122,7 @@ class VideosSubPage {
           });
 
           const newButtonMute = document.createElement('button');
+          newButtonMute.classList.add('controls__button');
           newButtonMute.id = 'mute';
           const newButtonMuteImage = document.createElement('img');
           newButtonMuteImage.src = './images/mute.svg';
@@ -138,6 +134,7 @@ class VideosSubPage {
           });
 
           const newButtonFullscreen = document.createElement('button');
+          newButtonFullscreen.classList.add('controls__button');
           newButtonFullscreen.id = 'fullscreen';
           const newButtonFullscreenImage = document.createElement('img');
           newButtonFullscreenImage.src = './images/fullscreen.svg';
@@ -154,6 +151,7 @@ class VideosSubPage {
           });
 
           const newButtonSkip = document.createElement('button');
+          newButtonSkip.classList.add('controls__button');
           newButtonSkip.id = 'skip';
           const newButtonSkipImage = document.createElement('img');
           newButtonSkipImage.src = './images/next.svg';

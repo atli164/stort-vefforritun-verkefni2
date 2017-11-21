@@ -2,8 +2,14 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 1em;
+  padding-bottom: 1em;
 
   &__title {
     display: block;
+    padding: 1em;
+    color: #fff;
+    font-size: 2em;
   }
 }

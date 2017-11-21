@@ -14,10 +14,11 @@
   &__title {
     font-weight: bold;
     white-space: nowrap;
+    margin-top: 0.5em;
   }
         
   &__time {
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.6);
     margin-top: -2em;
     display: inline;
   }

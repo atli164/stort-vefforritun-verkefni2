@@ -12,13 +12,11 @@ var VideosSubPage = function () {
 
         this.container = document.querySelector('body');
 
-        // Hjálparbreyta til að vita hvenær overlay á að vera til staðar
         var _window$location$href = window.location.href.split('?id=');
 
         var _window$location$href2 = _slicedToArray(_window$location$href, 2);
 
         this.id = _window$location$href2[1];
-        this.playing = false;
     }
 
     // Einhverskonar startup fall
@@ -59,12 +57,6 @@ var VideosSubPage = function () {
             });
         }
 
-        // Hjálparfall sem togglar paused overlay
-
-    }, {
-        key: 'toggleOverlay',
-        value: function toggleOverlay() {}
-
         // Aðalfall til að birta myndband ef það finnst
         // Inntak er source á vídeói
         // HD: Breytti aðeins. Við þurfum að birta titil, poster ofl.,
@@ -98,11 +90,11 @@ var VideosSubPage = function () {
                 //þarf CSS stílbrögð sem ákveða hvað sést og hvað ekki.
                 /*
                           const newPoster = document.createElement('img');
-                          newPoster.classlist.add('overlay');
+                          newPoster.classList.add('overlay');
                           newPoster.src = src.poster;
                           newVideo.appendChild(newPoster);
                           const newPlayButton = document.createElement('img');
-                          newPlayButton.classlist.add('overlay__play');
+                          newPlayButton.classList.add('overlay__play');
                           //Varúð, harðkóðað. Gætum líka þurft að parsa .svg skrána eitthvað
                           newPlayButton.src = './images/play.svg';
                           newVideo.appendChild(newPlayButton);
@@ -114,6 +106,7 @@ var VideosSubPage = function () {
                 newControlDiv.classList.add('controls');
 
                 var newButtonRewind = document.createElement('button');
+                newButtonRewind.classList.add('controls__button');
                 newButtonRewind.id = 'rewind';
                 var newButtonRewindImage = document.createElement('img');
                 newButtonRewindImage.src = './images/back.svg';
@@ -130,6 +123,7 @@ var VideosSubPage = function () {
                 });
 
                 var newButtonPlay = document.createElement('button');
+                newButtonPlay.classList.add('controls__button');
                 newButtonPlay.id = 'playpause';
                 var newButtonPlayImage = document.createElement('img');
                 newButtonPlayImage.src = './images/play.svg';
@@ -147,6 +141,7 @@ var VideosSubPage = function () {
                 });
 
                 var newButtonMute = document.createElement('button');
+                newButtonMute.classList.add('controls__button');
                 newButtonMute.id = 'mute';
                 var newButtonMuteImage = document.createElement('img');
                 newButtonMuteImage.src = './images/mute.svg';
@@ -158,6 +153,7 @@ var VideosSubPage = function () {
                 });
 
                 var newButtonFullscreen = document.createElement('button');
+                newButtonFullscreen.classList.add('controls__button');
                 newButtonFullscreen.id = 'fullscreen';
                 var newButtonFullscreenImage = document.createElement('img');
                 newButtonFullscreenImage.src = './images/fullscreen.svg';
@@ -171,6 +167,7 @@ var VideosSubPage = function () {
                 });
 
                 var newButtonSkip = document.createElement('button');
+                newButtonSkip.classList.add('controls__button');
                 newButtonSkip.id = 'skip';
                 var newButtonSkipImage = document.createElement('img');
                 newButtonSkipImage.src = './images/next.svg';

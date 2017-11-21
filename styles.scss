@@ -8,12 +8,24 @@
 html { /* stylelint-disable-line */
   background-color: rgba(0, 0, 0, 0.5);
   box-sizing: border-box;
-  font-family: helvetica, arial, sans-serif;
+  font-family: "open sans", sans-serif;
   font-size: 16px;
   line-height: 1.5;
   max-width: 1200px;
   padding: 20px;
   margin: 0 auto;
+  color: #fff;
+}
+
+h1, h2 { /* stylelint-disable-line */
+  font-family: "Roboto", sans-serif;
+}
+
+.title {
+  font-size: 3em;
+  font-weight: bold;
+  text-align: center;
+  padding-bottom: 0.5em;
 }
 
 @import "scss/controls";
