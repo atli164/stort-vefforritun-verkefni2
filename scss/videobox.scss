@@ -15,8 +15,10 @@
     font-weight: bold;
     white-space: nowrap;
     margin-top: 0.5em;
+    overflow: hidden;
+    text-overflow: clip;
   }
-        
+
   &__time {
     background-color: rgba(0, 0, 0, 0.6);
     margin-top: -2em;
