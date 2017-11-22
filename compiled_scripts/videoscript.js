@@ -183,7 +183,20 @@ var VideosSubPage = function () {
                                                             newVideo.currentTime += 3;
                                                   }
                                         });
+
                                         this.container.appendChild(newControlDiv);
+
+                                        var backDiv = document.createElement('div');
+                                        backDiv.classList.add('backdiv');
+                                        var backlink = document.createElement('a');
+                                        backlink.classList.add('backlink');
+                                        //Gætum notað eftirfarandi, en getum ekki endilega treyst því, þar sem
+                                        //history í sumum browsers getur líka innihaldið smellina á vídeó takkana.
+                                        //backlink.href = 'javascript:history.back()');
+                                        //Notum því einfaldlega þetta í staðinn:
+                                        backlink.href = '/index.html';
+                                        backDiv.appendChild(backlink);
+                                        this.container.appendChild(backDiv);
                               }
                     }
 
@@ -203,6 +216,17 @@ var VideosSubPage = function () {
                               var errortext = document.createTextNode('Vídeó fannst ekki!');
                               perror.appendChild(errortext);
                               this.container.appendChild(perror);
+                              var backDiv = document.createElement('div');
+                              backDiv.classList.add('backdiv');
+                              var backlink = document.createElement('a');
+                              backlink.classList.add('backlink');
+                              //Gætum notað eftirfarandi, en getum ekki endilega treyst því, þar sem
+                              //history í sumum browsers getur líka innihaldið smellina á vídeó takkana.
+                              //backlink.href = 'javascript:history.back()');
+                              //Notum því einfaldlega þetta í staðinn:
+                              backlink.href = '/index.html';
+                              backDiv.appendChild(backlink);
+                              this.container.appendChild(backDiv);
                     }
           }]);
 

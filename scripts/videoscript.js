@@ -167,7 +167,20 @@ class VideosSubPage {
                   newVideo.currentTime += 3;
               }
           });
+
           this.container.appendChild(newControlDiv);
+
+          const backDiv = document.createElement('div');
+          backDiv.classList.add('backdiv');
+          const backlink = document.createElement('a');
+          backlink.classList.add('backlink');
+          //Gætum notað eftirfarandi, en getum ekki endilega treyst því, þar sem
+          //history í sumum browsers getur líka innihaldið smellina á vídeó takkana.
+          //backlink.href = 'javascript:history.back()');
+          //Notum því einfaldlega þetta í staðinn:
+          backlink.href = ('/index.html');
+          backDiv.appendChild(backlink);
+          this.container.appendChild(backDiv);
       }
   }
 
@@ -184,6 +197,18 @@ class VideosSubPage {
     const errortext = document.createTextNode('Vídeó fannst ekki!');
     perror.appendChild(errortext);
     this.container.appendChild(perror);
+    const backDiv = document.createElement('div');
+    backDiv.classList.add('backdiv');
+    const backlink = document.createElement('a');
+    backlink.classList.add('backlink');
+    //Gætum notað eftirfarandi, en getum ekki endilega treyst því, þar sem
+    //history í sumum browsers getur líka innihaldið smellina á vídeó takkana.
+    //backlink.href = 'javascript:history.back()');
+    //Notum því einfaldlega þetta í staðinn:
+    backlink.href = ('/index.html');
+    backDiv.appendChild(backlink);
+    this.container.appendChild(backDiv);
+
   }
 }
 
