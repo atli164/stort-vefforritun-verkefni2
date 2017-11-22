@@ -23,16 +23,16 @@ var VideosMainPage = function () {
         request.open('GET', 'videos.json', true);
         request.onload = function() {
           if (request.status >= 200 && request.status < 400) {
-              const data = JSON.parse(request.response);
+             const data = JSON.parse(request.response);
             console.log(data);
           } else {
             console.error('Villa', request);
           }
         };
-          request.onerror = function() {
+         request.onerror = function() {
           console.error('Óþekkt villa');
         };
-          request.send();
+         request.send();
       */
 
       // Dæmi #2 um hvernig hægt er að ná í JSON gögn með asynchronous hætti,

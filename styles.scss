@@ -6,27 +6,27 @@
 }
 
 html { /* stylelint-disable-line */
-  background-color: rgba(0, 0, 0, 0.5);
+  max-width: 1200px;
   box-sizing: border-box;
+  padding: 20px;
+  margin: 0 auto;
   font-family: "open sans", sans-serif;
   font-size: 16px;
   line-height: 1.5;
-  max-width: 1200px;
-  padding: 20px;
-  margin: 0 auto;
   color: #fff;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 h1, h2 { /* stylelint-disable-line */
-  font-family: "Roboto", sans-serif;
+  font-family: Roboto, sans-serif;
 }
 
 .title {
+  padding-bottom: 0.5em;
   font-size: 3em;
   font-weight: bold;
   text-align: center;
-  padding-bottom: 0.5em;
-  }
+}
 
 @import "scss/controls";
 @import "scss/mainvideo";

@@ -3,14 +3,14 @@
   justify-content: center;
 
   &__button {
-    margin: 0 1em;
     width: 155;
     max-width: 80px;
     height: auto;
+    margin: 0 1em;
     background: none;
-    border: none;
+    border: 0 solid #fff;
 
-    & img {
+    img {
       // TODO: bæta classi á img til að nota það sem selector
       width: 100%;
       height: 100%;
