@@ -11,13 +11,13 @@ class VideosSubPage {
     let foundVideo = false;
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
-      xhr.onload = function() {
+      // TODO: Binda þetta einhvernveginn svo skipta út megi
+      // function () fyrir () =>, ef það er gert núna breakar allt
+      xhr.onload = function () {
         const response = JSON.parse(this.response);
         const videoArray = response.videos;
-        for (let i = 0; i < videoArray.length; i++) {
-          // Förum varlega; === gerir ekkert type conversion og virkar ekki,
-          // en == virkar hins vegar rétt.
-          if (videoArray[i].id == videoID) {
+        for (let i = 0; i < videoArray.length; i += 1) {
+          if (videoArray[i].id === parseInt(videoID, 10)) {
             foundVideo = true;
             resolve(videoArray[i]);
           }
@@ -89,7 +89,7 @@ class VideosSubPage {
       newButtonRewind.appendChild(newButtonRewindImage);
       newControlDiv.appendChild(newButtonRewind);
 
-      newButtonRewind.addEventListener('click', function () {
+      newButtonRewind.addEventListener('click', () => {
         const currentTime = newVideo.currentTime;
         if (currentTime <= 3) {
           newVideo.currentTime = 0;
@@ -106,7 +106,7 @@ class VideosSubPage {
       newButtonPlay.appendChild(newButtonPlayImage);
       newControlDiv.appendChild(newButtonPlay);
 
-      newButtonPlay.addEventListener('click', function () {
+      newButtonPlay.addEventListener('click', () => {
         if (newVideo.paused) {
           newButtonPlayImage.src = './images/pause.svg';
           newVideo.play();
@@ -124,7 +124,7 @@ class VideosSubPage {
       newButtonMute.appendChild(newButtonMuteImage);
       newControlDiv.appendChild(newButtonMute);
 
-      newButtonMute.addEventListener('click', function () {
+      newButtonMute.addEventListener('click', () => {
         newVideo.muted = !(newVideo.muted);
       });
 
@@ -136,7 +136,7 @@ class VideosSubPage {
       newButtonFullscreen.appendChild(newButtonFullscreenImage);
       newControlDiv.appendChild(newButtonFullscreen);
 
-      newButtonFullscreen.addEventListener('click', function () {
+      newButtonFullscreen.addEventListener('click', () => {
         const requestFullScreen = newVideo.requestFullscreen
           || newVideo.msRequestFullscreen
           || newVideo.mozRequestFullScreen
@@ -153,9 +153,8 @@ class VideosSubPage {
       newButtonSkip.appendChild(newButtonSkipImage);
       newControlDiv.appendChild(newButtonSkip);
 
-      newButtonSkip.addEventListener('click', function () {
+      newButtonSkip.addEventListener('click', () => {
         const timeLeft = newVideo.duration - newVideo.currentTime;
-        console.log(timeLeft);
         if (timeLeft <= 3) {
           newVideo.currentTime = newVideo.duration;
         } else {
