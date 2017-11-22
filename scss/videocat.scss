@@ -14,3 +14,24 @@
     font-size: 2em;
   }
 }
+
+@media (max-width: 500px) {
+    .videocat {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: center;
+      border-bottom: 1px solid #eee;
+      margin-bottom: 1em;
+      padding-bottom: 1em;
+
+
+      &__title {
+        display: block;
+        padding: 1em;
+        color: #fff;
+        font-size: 2em;
+      }
+    }
+
+}
