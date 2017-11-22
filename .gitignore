@@ -1,4 +1,5 @@
 /node_modules
+/compiled_scripts
 package-lock.json
 styles.css
 script-compiled.js
