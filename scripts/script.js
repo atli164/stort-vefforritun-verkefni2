@@ -50,15 +50,15 @@ class VideosMainPage {
 
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
-      //Búum til private breytu sem geymir rétt scope á this...
-      //const that = this;
-      //console.log(that);
-      //...sendum svo hana í onload og notum hana í JSON.parse
-      //xhr.onload = (that) => {
-      //Virkaði samt ekki án þess að kasta villu í npm. Notum lambda fall
-      //rétt á meðan við erum að klára aðra virkni.
-      xhr.onload = function() {
-          resolve(JSON.parse(this.response));
+      // Búum til private breytu sem geymir rétt scope á this...
+      // const that = this;
+      // console.log(that);
+      // ...sendum svo hana í onload og notum hana í JSON.parse
+      // xhr.onload = (that) => {
+      // Virkaði samt ekki án þess að kasta villu í npm. Notum lambda fall
+      // rétt á meðan við erum að klára aðra virkni.
+      xhr.onload = function () {
+        resolve(JSON.parse(this.response));
       };
       xhr.onerror = reject;
       xhr.open('GET', 'videos.json');
@@ -85,12 +85,12 @@ class VideosMainPage {
     const year = 365 * 24 * 60 * 60 * 1000;
     if (now - date >= year) {
       const years = (now - date) / year;
-      //Kippti út years === 1 svo Math.floor(years) skili ekki áfram 1
-      //ef við erum í t.d. 1.9999.
-      //(Það er alveg til umræðu hvort við viljum vera að rúnna niður með
-      //Math.floor() yfirhöfuð; mér finnst það eðlilegast og tel það gera fyrir
-      //sem einfaldastan kóða, en við gætum farið aðrar leiðir)
-      if ( (years >= 1) && (years < 2) ) {
+      // Kippti út years === 1 svo Math.floor(years) skili ekki áfram 1
+      // ef við erum í t.d. 1.9999.
+      // (Það er alveg til umræðu hvort við viljum vera að rúnna niður með
+      // Math.floor() yfirhöfuð; mér finnst það eðlilegast og tel það gera fyrir
+      // sem einfaldastan kóða, en við gætum farið aðrar leiðir)
+      if ((years >= 1) && (years < 2)) {
         return 'Fyrir 1 ári síðan';
       }
       const yearsRounded = Math.floor(years);
@@ -99,7 +99,7 @@ class VideosMainPage {
     const month = 30 * 24 * 60 * 60 * 1000;
     if (now - date >= month) {
       const months = (now - date) / month;
-      if ( (months >= 1) && (months < 2) ) {
+      if ((months >= 1) && (months < 2)) {
         return 'Fyrir 1 mánuði síðan';
       }
       const monthsRounded = Math.floor(months);
@@ -108,7 +108,7 @@ class VideosMainPage {
     const week = 7 * 24 * 60 * 60 * 1000;
     if (now - date >= week) {
       const weeks = (now - date) / week;
-      if ( (weeks >= 1) && (weeks < 2) ) {
+      if ((weeks >= 1) && (weeks < 2)) {
         return 'Fyrir 1 viku síðan';
       }
       const weeksRounded = Math.floor(weeks);
@@ -117,7 +117,7 @@ class VideosMainPage {
     const day = 24 * 60 * 60 * 1000;
     if (now - date > day) {
       const days = (now - date) / day;
-      if ( (days >= 1) && (days < 2) ) {
+      if ((days >= 1) && (days < 2)) {
         return 'Fyrir 1 degi síðan';
       }
       const daysRounded = Math.floor(days);
@@ -127,7 +127,7 @@ class VideosMainPage {
     const hours = (now - date) / hour;
     if (hours < 1) {
       return 'Fyrir minna en klukkustund síðan';
-    } else if ( (hours >= 1) && (hours < 2) ) {
+    } else if ((hours >= 1) && (hours < 2)) {
       return 'Fyrir 1 klukkustund síðan';
     }
     const hoursRounded = Math.floor(hours);
@@ -136,22 +136,22 @@ class VideosMainPage {
 
   // Fall sem tekur við duration of spýtir út lengdarstreng
   parseDur(duration) {
-    //Mögulegt TODO: Bæta við klukkustundarreikningi og viðeigandi return skipun.
+    // Mögulegt TODO: Bæta við klukkustundarreikningi og viðeigandi return skipun.
     const min = duration / 60;
     const sec = duration % 60;
-    //Já, við gætum gert þetta allt með
-    // return min.toString().concat(':', sec.toString());
-    //en mér er illa við að keyra þrjú föll innan í return setningu - það
-    //leiðir til scope loss og undefined skemmtilegheita.
-    //Tek þetta frekar í sundur fyrir aðeins læsilegri og áreiðanlegri kóða.
+    // Já, við gætum gert þetta allt með
+    //  return min.toString().concat(':', sec.toString());
+    // en mér er illa við að keyra þrjú föll innan í return setningu - það
+    // leiðir til scope loss og undefined skemmtilegheita.
+    // Tek þetta frekar í sundur fyrir aðeins læsilegri og áreiðanlegri kóða.
     const minRounded = Math.floor(min);
     const minString = minRounded.toString();
     const secRounded = Math.floor(sec);
     const secString = secRounded.toString();
-    if(secRounded <= 9) {
-        return minString + ':0' + secRounded;
+    if (secRounded <= 9) {
+      return minString.concat(':0', secString);
     }
-    return minString + ':' + secRounded;
+    return minString.concat(':', secString);
   }
 
   // Fall sem býr til eitt div utan um vídeo með aldri, tíma, titli etc.
@@ -218,7 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
   videos.load()
     .then((result) => {
       // videos.proofOfConcept(result);
-      //console.log(result);
+      // console.log(result);
       videos.parse(result);
     })
     .catch(() => {

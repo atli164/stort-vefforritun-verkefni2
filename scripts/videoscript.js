@@ -12,31 +12,30 @@ class VideosSubPage {
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
       xhr.onload = function() {
-          const response = JSON.parse(this.response);
-          const videoArray = response.videos;
-          for(let i = 0; i < videoArray.length; i++) {
-              //Förum varlega; === gerir ekkert type conversion og virkar ekki,
-              //en == virkar hins vegar rétt.
-              if(videoArray[i].id == videoID) {
-                foundVideo = true;
-                resolve(videoArray[i]);
-              }
+        const response = JSON.parse(this.response);
+        const videoArray = response.videos;
+        for (let i = 0; i < videoArray.length; i++) {
+          // Förum varlega; === gerir ekkert type conversion og virkar ekki,
+          // en == virkar hins vegar rétt.
+          if (videoArray[i].id == videoID) {
+            foundVideo = true;
+            resolve(videoArray[i]);
           }
-          if(!foundVideo) {
-              //Ekkert vídeó með þessu id fannst. Ath. að við erum bara að gera
-              //eitt hérna: Lesa úr JSON skrá. Ef það gekk þá skilum við
-              //resolve, jafnvel þó vídeóið hafi ekki fundist í skránni.
-              //Við þurfum þ.afl. að bregðast við því *annars staðar* ef
-              //við gátum opnað JSON en fundum ekkert vídeó með þessu ID.
-              //Gerum það í display().
-              resolve(null);
-          }
+        }
+        if (!foundVideo) {
+          // Ekkert vídeó með þessu id fannst. Ath. að við erum bara að gera
+          // eitt hérna: Lesa úr JSON skrá. Ef það gekk þá skilum við
+          // resolve, jafnvel þó vídeóið hafi ekki fundist í skránni.
+          // Við þurfum þ.afl. að bregðast við því *annars staðar* ef
+          // við gátum opnað JSON en fundum ekkert vídeó með þessu ID.
+          // Gerum það í display().
+          resolve(null);
+        }
       };
       xhr.onerror = reject;
       xhr.open('GET', 'videos.json');
       xhr.send();
-  });
-
+    });
   }
 
   // Aðalfall til að birta myndband ef það finnst
@@ -45,143 +44,139 @@ class VideosSubPage {
   // svo ef þetta er aðalfallið verður src að vera ekki bara
   // slóðin á .mp4 skrána, heldur video hlutur með allar þessar upplýsingar.
   display(src) {
+    if (!src) {
+      this.displayerror();
+      // Viljum við hætta hér með "return;" ?
+    } else {
+      // Skellum upp elementum með myndbandinu:
+      const newHeader = document.createElement('h1');
+      newHeader.classList.add('title');
+      newHeader.appendChild(document.createTextNode(src.title));
+      this.container.appendChild(newHeader);
 
-      if(!src){
-          this.displayerror();
-          //Viljum við hætta hér með "return;" ?
-      }
-      else {
-          //Skellum upp elementum með myndbandinu:
+      const newVideo = document.createElement('video');
+      newVideo.classList.add('mainvideo');
 
-          const newHeader = document.createElement('h1');
-          newHeader.classList.add('title');
-          newHeader.appendChild(document.createTextNode(src.title));
-          this.container.appendChild(newHeader);
+      const newSource = document.createElement('source');
+      newSource.classList.add('videosource');
+      newSource.src = src.video;
+      newVideo.appendChild(newSource);
 
-          const newVideo = document.createElement('video');
-          newVideo.classList.add('mainvideo');
+      // HD: Eftirfarandi kóði lætur allt hverfa. Er annað hvort rangur hjá mér, eða
+      // þarf CSS stílbrögð sem ákveða hvað sést og hvað ekki.
+      /*
+      const newPoster = document.createElement('img');
+      newPoster.classList.add('overlay');
+      newPoster.src = src.poster;
+      newVideo.appendChild(newPoster);
+      const newPlayButton = document.createElement('img');
+      newPlayButton.classList.add('overlay__play');
+      //Varúð, harðkóðað. Gætum líka þurft að parsa .svg skrána eitthvað
+      newPlayButton.src = './images/play.svg';
+      newVideo.appendChild(newPlayButton);
+      */
 
-          const newSource = document.createElement('source');
-          newSource.classList.add('videosource');
-          newSource.src = src.video;
-          newVideo.appendChild(newSource);
+      this.container.appendChild(newVideo);
 
-//HD: Eftirfarandi kóði lætur allt hverfa. Er annað hvort rangur hjá mér, eða
-//þarf CSS stílbrögð sem ákveða hvað sést og hvað ekki.
-/*
-          const newPoster = document.createElement('img');
-          newPoster.classList.add('overlay');
-          newPoster.src = src.poster;
-          newVideo.appendChild(newPoster);
-          const newPlayButton = document.createElement('img');
-          newPlayButton.classList.add('overlay__play');
-          //Varúð, harðkóðað. Gætum líka þurft að parsa .svg skrána eitthvað
-          newPlayButton.src = './images/play.svg';
-          newVideo.appendChild(newPlayButton);
-*/
+      const newControlDiv = document.createElement('div');
+      newControlDiv.classList.add('controls');
 
-          this.container.appendChild(newVideo);
+      const newButtonRewind = document.createElement('button');
+      newButtonRewind.classList.add('controls__button');
+      newButtonRewind.id = 'rewind';
+      const newButtonRewindImage = document.createElement('img');
+      newButtonRewindImage.src = './images/back.svg';
+      newButtonRewind.appendChild(newButtonRewindImage);
+      newControlDiv.appendChild(newButtonRewind);
 
-          const newControlDiv = document.createElement('div');
-          newControlDiv.classList.add('controls');
+      newButtonRewind.addEventListener('click', function () {
+        const currentTime = newVideo.currentTime;
+        if (currentTime <= 3) {
+          newVideo.currentTime = 0;
+        } else {
+          newVideo.currentTime -= 3;
+        }
+      });
 
-          const newButtonRewind = document.createElement('button');
-          newButtonRewind.classList.add('controls__button');
-          newButtonRewind.id = 'rewind';
-          const newButtonRewindImage = document.createElement('img');
-          newButtonRewindImage.src = './images/back.svg';
-          newButtonRewind.appendChild(newButtonRewindImage);
-          newControlDiv.appendChild(newButtonRewind);
+      const newButtonPlay = document.createElement('button');
+      newButtonPlay.classList.add('controls__button');
+      newButtonPlay.id = 'playpause';
+      const newButtonPlayImage = document.createElement('img');
+      newButtonPlayImage.src = './images/play.svg';
+      newButtonPlay.appendChild(newButtonPlayImage);
+      newControlDiv.appendChild(newButtonPlay);
 
-          newButtonRewind.addEventListener('click', function () {
-              const currentTime = newVideo.currentTime;
-              if(currentTime <= 3){
-                  newVideo.currentTime = 0;
-              } else {
-                  newVideo.currentTime -= 3;
-              }
-          });
-
-          const newButtonPlay = document.createElement('button');
-          newButtonPlay.classList.add('controls__button');
-          newButtonPlay.id = 'playpause';
-          const newButtonPlayImage = document.createElement('img');
+      newButtonPlay.addEventListener('click', function () {
+        if (newVideo.paused) {
+          newButtonPlayImage.src = './images/pause.svg';
+          newVideo.play();
+        } else {
           newButtonPlayImage.src = './images/play.svg';
-          newButtonPlay.appendChild(newButtonPlayImage);
-          newControlDiv.appendChild(newButtonPlay);
+          newVideo.pause();
+        }
+      });
 
-          newButtonPlay.addEventListener('click', function () {
-              if (newVideo.paused) {
-                newButtonPlayImage.src = './images/pause.svg';
-                newVideo.play();
+      const newButtonMute = document.createElement('button');
+      newButtonMute.classList.add('controls__button');
+      newButtonMute.id = 'mute';
+      const newButtonMuteImage = document.createElement('img');
+      newButtonMuteImage.src = './images/mute.svg';
+      newButtonMute.appendChild(newButtonMuteImage);
+      newControlDiv.appendChild(newButtonMute);
 
-              } else {
-                newButtonPlayImage.src = './images/play.svg';
-                newVideo.pause();
-              }
-          });
+      newButtonMute.addEventListener('click', function () {
+        newVideo.muted = !(newVideo.muted);
+      });
 
-          const newButtonMute = document.createElement('button');
-          newButtonMute.classList.add('controls__button');
-          newButtonMute.id = 'mute';
-          const newButtonMuteImage = document.createElement('img');
-          newButtonMuteImage.src = './images/mute.svg';
-          newButtonMute.appendChild(newButtonMuteImage);
-          newControlDiv.appendChild(newButtonMute);
+      const newButtonFullscreen = document.createElement('button');
+      newButtonFullscreen.classList.add('controls__button');
+      newButtonFullscreen.id = 'fullscreen';
+      const newButtonFullscreenImage = document.createElement('img');
+      newButtonFullscreenImage.src = './images/fullscreen.svg';
+      newButtonFullscreen.appendChild(newButtonFullscreenImage);
+      newControlDiv.appendChild(newButtonFullscreen);
 
-          newButtonMute.addEventListener('click', function () {
-              newVideo.muted = !(newVideo.muted);
-          });
+      newButtonFullscreen.addEventListener('click', function () {
+        const requestFullScreen = newVideo.requestFullscreen
+          || newVideo.msRequestFullscreen
+          || newVideo.mozRequestFullScreen
+          || newVideo.webkitRequestFullscreen;
 
-          const newButtonFullscreen = document.createElement('button');
-          newButtonFullscreen.classList.add('controls__button');
-          newButtonFullscreen.id = 'fullscreen';
-          const newButtonFullscreenImage = document.createElement('img');
-          newButtonFullscreenImage.src = './images/fullscreen.svg';
-          newButtonFullscreen.appendChild(newButtonFullscreenImage);
-          newControlDiv.appendChild(newButtonFullscreen);
+        requestFullScreen.call(newVideo);
+      });
 
-          newButtonFullscreen.addEventListener('click', function () {
-              const requestFullScreen = newVideo.requestFullscreen
-                || newVideo.msRequestFullscreen
-                || newVideo.mozRequestFullScreen
-                || newVideo.webkitRequestFullscreen;
+      const newButtonSkip = document.createElement('button');
+      newButtonSkip.classList.add('controls__button');
+      newButtonSkip.id = 'skip';
+      const newButtonSkipImage = document.createElement('img');
+      newButtonSkipImage.src = './images/next.svg';
+      newButtonSkip.appendChild(newButtonSkipImage);
+      newControlDiv.appendChild(newButtonSkip);
 
-              requestFullScreen.call(newVideo);
-          });
+      newButtonSkip.addEventListener('click', function () {
+        const timeLeft = newVideo.duration - newVideo.currentTime;
+        console.log(timeLeft);
+        if (timeLeft <= 3) {
+          newVideo.currentTime = newVideo.duration;
+        } else {
+          newVideo.currentTime += 3;
+        }
+      });
 
-          const newButtonSkip = document.createElement('button');
-          newButtonSkip.classList.add('controls__button');
-          newButtonSkip.id = 'skip';
-          const newButtonSkipImage = document.createElement('img');
-          newButtonSkipImage.src = './images/next.svg';
-          newButtonSkip.appendChild(newButtonSkipImage);
-          newControlDiv.appendChild(newButtonSkip);
+      this.container.appendChild(newControlDiv);
 
-          newButtonSkip.addEventListener('click', function () {
-              const timeLeft = newVideo.duration - newVideo.currentTime;
-              console.log(timeLeft);
-              if(timeLeft <= 3){
-                  newVideo.currentTime = newVideo.duration;
-              } else {
-                  newVideo.currentTime += 3;
-              }
-          });
-
-          this.container.appendChild(newControlDiv);
-
-          const backDiv = document.createElement('div');
-          backDiv.classList.add('backdiv');
-          const backlink = document.createElement('a');
-          backlink.classList.add('backlink');
-          //Gætum notað eftirfarandi, en getum ekki endilega treyst því, þar sem
-          //history í sumum browsers getur líka innihaldið smellina á vídeó takkana.
-          //backlink.href = 'javascript:history.back()');
-          //Notum því einfaldlega þetta í staðinn:
-          backlink.href = ('/index.html');
-          backDiv.appendChild(backlink);
-          this.container.appendChild(backDiv);
-      }
+      const backDiv = document.createElement('div');
+      backDiv.classList.add('backdiv');
+      const backlink = document.createElement('a');
+      backlink.classList.add('backlink');
+      // Gætum notað eftirfarandi, en getum ekki endilega treyst því, þar sem
+      // history í sumum browsers getur líka innihaldið smellina á vídeó takkana.
+      // backlink.href = 'javascript:history.back()');
+      // Notum því einfaldlega þetta í staðinn:
+      backlink.href = ('/index.html');
+      backDiv.appendChild(backlink);
+      this.container.appendChild(backDiv);
+    }
   }
 
   // Fall sem birt er ef ekki tekst að ná í videos.json
@@ -201,14 +196,13 @@ class VideosSubPage {
     backDiv.classList.add('backdiv');
     const backlink = document.createElement('a');
     backlink.classList.add('backlink');
-    //Gætum notað eftirfarandi, en getum ekki endilega treyst því, þar sem
-    //history í sumum browsers getur líka innihaldið smellina á vídeó takkana.
-    //backlink.href = 'javascript:history.back()');
-    //Notum því einfaldlega þetta í staðinn:
+    // Gætum notað eftirfarandi, en getum ekki endilega treyst því, þar sem
+    // history í sumum browsers getur líka innihaldið smellina á vídeó takkana.
+    // backlink.href = 'javascript:history.back()');
+    // Notum því einfaldlega þetta í staðinn:
     backlink.href = ('/index.html');
     backDiv.appendChild(backlink);
     this.container.appendChild(backDiv);
-
   }
 }
 
@@ -220,9 +214,9 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .catch(() => {
       // Bregðast við villu hérna.
-      //ATH: Villa virðist koma upp sama hvað, svo ég kommenta út
+      // ATH: Villa virðist koma upp sama hvað, svo ég kommenta út
       // displayerror fallið þar til við getum leyst þetta - annars
       // strokar það alltaf allt út af skjánum jafnvel ef vídeóið fannst.
-      //video.displayerror();
+      // video.displayerror();
     });
 });
