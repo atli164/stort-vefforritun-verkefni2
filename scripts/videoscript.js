@@ -56,6 +56,7 @@ class VideosSubPage {
 
       const newVideo = document.createElement('video');
       newVideo.classList.add('mainvideo');
+      newVideo.poster = src.poster;
 
       const newSource = document.createElement('source');
       newSource.classList.add('videosource');
