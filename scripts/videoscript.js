@@ -63,7 +63,6 @@ class VideosSubPage {
 
       const newVideo = document.createElement('video');
       newVideo.classList.add('mainvideo');
-      //TODO: Athuga hvort þessi lína er að blokkera play takkann fyrir miðju
       newVideo.poster = src.poster;
 
       const newSource = document.createElement('source');
@@ -78,7 +77,7 @@ class VideosSubPage {
       // bara fyrir hnapp sem hefur *líka* class 'overlay_play'
       pauseImg.classList.add('overlay__play');
       pauseImg.src = './images/play.svg';
-      newVideo.appendChild(pauseImg);
+      newVideoDiv.appendChild(pauseImg);
 
       /*
       //Tilraun til að gera þetta að hnappi og setja img sem barn hans. Virkar ekki.
@@ -104,10 +103,8 @@ class VideosSubPage {
       });
 
       //Tilraun til að loka vídeóið innan í div, upp á að geta notað position
-      //newVideoDiv.appendChild(newVideo);
-      //this.container.appendChild(newVideoDiv);
-
-      this.container.appendChild(newVideo);
+      newVideoDiv.appendChild(newVideo);
+      this.container.appendChild(newVideoDiv);
 
       /*
       const newPauseDiv = document.createElement('div');

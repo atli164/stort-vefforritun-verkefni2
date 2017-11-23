@@ -1,43 +1,30 @@
+.mainvideodiv {
+  display: table;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  margin-bottom: 1em;
+}
 
 .mainvideo {
   width: 100%;
   margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  //Prufaði eftirfarandi með newVideoDiv í videoscript.js, virkaði ekki
-  //position: absolute;
-
-  &__pauseImg {
-    z-index: 1;
-    height: 100%;
-  }
-
+  position: relative;
 }
 
-.videosource {
-    //z-index virkar bara ef hægt er að nota position:relative, og
-    //position:relative virðist bara virka ef foreldris elementið er að nota
-    //position:absolute - en það brýtur upp flexið okkar, jafnvel ef við
-    //lokum .mainvideo innan í div
-    position:relative;
-    z-index: 1;
+.overlay__play {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto auto;
+  width: 10%;
+  height: auto;
+  z-index: 1;
 }
 
- .overlay__play {
-      position: relative;
-      z-index: 2;
-      //height: 100%;
-      //display: block;
-      //width: 155;
-      max-width: 80px;
-      //height: auto;
-      //margin: 0 auto;
-      height: 100%;
-      width: 100%;
-
-      .--hidden {
-        display: none;
-      }
-  }
+.--hidden {
+  display: none;
+}
