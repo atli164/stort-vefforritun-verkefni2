@@ -2,7 +2,22 @@
 
 ## TODO:
 
-TODO: Gera TODO
+### Núna
+
+* Bæta við play merki þegar myndband pásast
+* Klára 500px útlit
+* Setja dekkri lit yfir myndband þegar það pásast (held að það sé auðveld leið til þess, á bara eftir að komast í það)
+* Láta langa title cuttast off í heilum orðum (ekki láta hálft orð birtast eins og það er nú)
+* Laga backdiv svo það sé ekki 0px
+* Laga langa titla á videos síðu
+* Annað CSS? Þetta er orðið nokkuð svipað fyrirmyndinni finnst mér
+
+### Í lokin
+
+* Samræma öll HTML komment við raunverulega virkni
+* Klára stylelinting
+* Klára eslinting
+* Hreinsa conversational comment úr öllum skjölum
 
 ## Keyrsla
 
