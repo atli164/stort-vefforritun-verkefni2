@@ -90,15 +90,14 @@ class VideosSubPage {
 
       pauseImg.addEventListener('click', () => {
         if (newVideo.paused) {
-          //newButtonVideo.style.display = 'none';
           pauseImg.classList.add('--hidden');
           newVideo.play();
+          newButtonPlayImage.src = './images/pause.svg';
 
         } else {
           newVideo.pause();
-          //newVideo.poster = src.poster;
           pauseImg.classList.remove('--hidden');
-         // newButtonVideo.style.display = 'block';
+          newButtonPlayImage.src = './images/play.svg';
         }
       });
 
