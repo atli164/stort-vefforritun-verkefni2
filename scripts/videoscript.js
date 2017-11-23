@@ -225,10 +225,10 @@ class VideosSubPage {
     title.classList.add('title');
     const titletext = document.createTextNode('Myndbandaleigan');
     title.appendChild(titletext);
-    this.container.appendChild(titletext);
+    this.container.appendChild(title);
     const perror = document.createElement('p');
-    perror.classList.add('error');
-    const errortext = document.createTextNode('Vídeó fannst ekki!');
+    perror.classList.add('videoerror');
+    const errortext = document.createTextNode('Vídeó er ekki til');
     perror.appendChild(errortext);
     this.container.appendChild(perror);
     const backDiv = document.createElement('div');
@@ -240,6 +240,7 @@ class VideosSubPage {
     // backlink.href = 'javascript:history.back()');
     // Notum því einfaldlega þetta í staðinn:
     backlink.href = ('/index.html');
+    backlink.innerHTML = 'Til baka';
     backDiv.appendChild(backlink);
     this.container.appendChild(backDiv);
   }

@@ -61,6 +61,7 @@ class VideosMainPage {
         resolve(JSON.parse(this.response));
       };
       xhr.onerror = reject;
+      };
       xhr.open('GET', 'videos.json');
       xhr.send();
     });
@@ -209,7 +210,18 @@ class VideosMainPage {
       this.container.appendChild(catBoxTitle);
       this.container.appendChild(catBox);
     });
+
   }
+
+  displayLoadingerror() {
+      const perror = document.createElement('p');
+      perror.classList.add('categoryerror');
+      const errortext = document.createTextNode('Gat ekki hlaðið gögnum');
+      perror.appendChild(errortext);
+      this.container.appendChild(perror);
+  }
+
+
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -221,7 +233,9 @@ document.addEventListener('DOMContentLoaded', () => {
       // console.log(result);
       videos.parse(result);
     })
-    .catch(() => {
-      // Bregðast við villu hérna.
+    .catch((result) => {
+      videos.displayLoadingerror();
+      //console.log("in catch");
+      //console.log(result);
     });
 });

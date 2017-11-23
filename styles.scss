@@ -16,10 +16,15 @@ html { /* stylelint-disable-line */
   color: #fff;
   background-color: #333333;
 
+
 }
 
 h1, h2 { /* stylelint-disable-line */
   font-family: Roboto, sans-serif;
+}
+
+h1 {
+    text-align: center;
 }
 
 .title {
