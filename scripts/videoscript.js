@@ -58,6 +58,11 @@ class VideosSubPage {
       newVideo.classList.add('mainvideo');
       newVideo.poster = src.poster;
 
+      const pauseImg = document.createElement('img');
+      pauseImg.classList.add('mainvideo__pauseImg');
+      pauseImg.src = './images/play.svg';
+      newVideo.appendChild(pauseImg);
+
       const newSource = document.createElement('source');
       newSource.classList.add('videosource');
       newSource.src = src.video;
@@ -111,9 +116,11 @@ class VideosSubPage {
         if (newVideo.paused) {
           newButtonPlayImage.src = './images/pause.svg';
           newVideo.play();
+          pauseImg.classList.add('--hidden');
         } else {
           newButtonPlayImage.src = './images/play.svg';
           newVideo.pause();
+          pauseImg.classList.remove('--hidden');
         }
       });
 
