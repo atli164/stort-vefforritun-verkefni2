@@ -212,6 +212,7 @@ class VideosSubPage {
       // backlink.href = 'javascript:history.back()');
       // Notum því einfaldlega þetta í staðinn:
       backlink.href = ('/index.html');
+      backlink.innerHTML = 'Til baka';
       backDiv.appendChild(backlink);
       this.container.appendChild(backDiv);
     }
