@@ -54,35 +54,70 @@ class VideosSubPage {
       newHeader.appendChild(document.createTextNode(src.title));
       this.container.appendChild(newHeader);
 
+      //Prufa: Gætum þurft að nota position:absolute og :relative til að
+      //z-index virki á play takkann - en þá þurfum við að troða vídeóinu inn
+      //í div svo það eyðileggi ekki fyrir flex flæðinu á öllum öðrum elementum
+      //síðunnar
+      const newVideoDiv = document.createElement('div');
+      newVideoDiv.classList.add('mainvideodiv');
+
       const newVideo = document.createElement('video');
       newVideo.classList.add('mainvideo');
+      //TODO: Athuga hvort þessi lína er að blokkera play takkann fyrir miðju
       newVideo.poster = src.poster;
-
-      const pauseImg = document.createElement('img');
-      pauseImg.classList.add('mainvideo__pauseImg');
-      pauseImg.src = './images/play.svg';
-      newVideo.appendChild(pauseImg);
 
       const newSource = document.createElement('source');
       newSource.classList.add('videosource');
       newSource.src = src.video;
       newVideo.appendChild(newSource);
 
-      // HD: Eftirfarandi kóði lætur allt hverfa. Er annað hvort rangur hjá mér, eða
-      // þarf CSS stílbrögð sem ákveða hvað sést og hvað ekki.
+      const pauseImg = document.createElement('img');
+      //Notaði eftirfarandi classname skv. leiðbeiningum í video.html
+      //Gætum samt þarft að bæta líka við class controls_button eða id 'playpause'
+      //til að þessi hafi sjálfkrafa sömu stærð og útlit, og útbúið auka reglu
+      // bara fyrir hnapp sem hefur *líka* class 'overlay_play'
+      pauseImg.classList.add('overlay__play');
+      pauseImg.src = './images/play.svg';
+      newVideo.appendChild(pauseImg);
+
       /*
-      const newPoster = document.createElement('img');
-      newPoster.classList.add('overlay');
-      newPoster.src = src.poster;
-      newVideo.appendChild(newPoster);
-      const newPlayButton = document.createElement('img');
-      newPlayButton.classList.add('overlay__play');
-      //Varúð, harðkóðað. Gætum líka þurft að parsa .svg skrána eitthvað
-      newPlayButton.src = './images/play.svg';
-      newVideo.appendChild(newPlayButton);
+      //Tilraun til að gera þetta að hnappi og setja img sem barn hans. Virkar ekki.
+      const newButtonVideoImage = document.createElement('img');
+      newButtonVideoImage.classList.add('overlay__play__img');
+      newButtonVideoImage.src = './images/play.svg';
+      newButtonVideo.appendChild(newButtonVideoImage);
+      newVideo.appendChild(newButtonVideo);
       */
 
+      pauseImg.addEventListener('click', () => {
+        if (newVideo.paused) {
+          //newButtonVideo.style.display = 'none';
+          pauseImg.classList.add('--hidden');
+          newVideo.play();
+
+        } else {
+          newVideo.pause();
+          //newVideo.poster = src.poster;
+          pauseImg.classList.remove('--hidden');
+         // newButtonVideo.style.display = 'block';
+        }
+      });
+
+      //Tilraun til að loka vídeóið innan í div, upp á að geta notað position
+      //newVideoDiv.appendChild(newVideo);
+      //this.container.appendChild(newVideoDiv);
+
       this.container.appendChild(newVideo);
+
+      /*
+      const newPauseDiv = document.createElement('div');
+      newPauseDiv.classList.add('mainvideo__pauseImg');
+      const pauseImg = document.createElement('img');
+      //pauseImg.classList.add('mainvideo__pauseImg');
+      pauseImg.src = './images/play.svg';
+      newPauseDiv.appendChild(pauseImg);
+      newVideo.appendChild(newPauseDiv);
+      */
 
       const newControlDiv = document.createElement('div');
       newControlDiv.classList.add('controls');
