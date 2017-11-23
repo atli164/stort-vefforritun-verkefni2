@@ -14,20 +14,9 @@
   }
 
   @media (max-width: 500px) {
-    display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    padding-bottom: 1em;
-    margin-bottom: 1em;
     flex-direction: column;
-    border-bottom: 1px solid #eee;
-
-    &__title {
-      display: block;
-      padding: 1em;
-      font-size: 2em;
-      color: #fff;
-    }
+    margin-bottom: 1em;
   }
 }
 

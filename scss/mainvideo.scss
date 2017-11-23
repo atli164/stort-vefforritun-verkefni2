@@ -1,4 +1,13 @@
 .mainvideo {
   width: 100%;
   margin: 0 auto;
+
+  &__pauseImg {
+    z-index: 1;
+    height: 100%;
+  }
+}
+
+.--hidden {
+  display: none;
 }
