@@ -16,8 +16,9 @@
     margin-top: 0.5em;
     overflow: hidden;
     font-weight: bold;
-    text-overflow: clip;
-    white-space: nowrap;
+    //text-overflow: clip;
+    overflow-wrap: break-word;
+    //white-space: nowrap;
   }
 
   &__time {
@@ -29,7 +30,7 @@
     background-color: rgba(0, 0, 0, 0.6);
     align-self: flex-end;
   }
-  
+
   @media only screen and (max-width: 500px) {
     flex-direction: column;
     margin: 0 auto;
@@ -48,4 +49,3 @@
     }
   }
 }
-
