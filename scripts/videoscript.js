@@ -61,8 +61,10 @@ class VideosSubPage {
       const newVideoDiv = document.createElement('div');
       newVideoDiv.classList.add('mainvideodiv');
 
+
       const newVideo = document.createElement('video');
       newVideo.classList.add('mainvideo');
+
       newVideo.poster = src.poster;
 
       const newSource = document.createElement('source');
@@ -70,33 +72,29 @@ class VideosSubPage {
       newSource.src = src.video;
       newVideo.appendChild(newSource);
 
+      const pauseDiv = document.createElement('div');
+      pauseDiv.classList.add('--greyedout');
       const pauseImg = document.createElement('img');
-      //Notaði eftirfarandi classname skv. leiðbeiningum í video.html
-      //Gætum samt þarft að bæta líka við class controls_button eða id 'playpause'
-      //til að þessi hafi sjálfkrafa sömu stærð og útlit, og útbúið auka reglu
-      // bara fyrir hnapp sem hefur *líka* class 'overlay_play'
+
       pauseImg.classList.add('overlay__play');
       pauseImg.src = './images/play.svg';
-      newVideoDiv.appendChild(pauseImg);
+      pauseDiv.appendChild(pauseImg);
+      newVideoDiv.appendChild(pauseDiv);
+      //newVideoDiv.appendChild(pauseImg);
 
-      /*
-      //Tilraun til að gera þetta að hnappi og setja img sem barn hans. Virkar ekki.
-      const newButtonVideoImage = document.createElement('img');
-      newButtonVideoImage.classList.add('overlay__play__img');
-      newButtonVideoImage.src = './images/play.svg';
-      newButtonVideo.appendChild(newButtonVideoImage);
-      newVideo.appendChild(newButtonVideo);
-      */
+
 
       pauseImg.addEventListener('click', () => {
         if (newVideo.paused) {
           pauseImg.classList.add('--hidden');
+          pauseDiv.classList.remove('--greyedout');
           newVideo.play();
           newButtonPlayImage.src = './images/pause.svg';
 
         } else {
           newVideo.pause();
           pauseImg.classList.remove('--hidden');
+          pauseDiv.classList.add('--greyedout');
           newButtonPlayImage.src = './images/play.svg';
         }
       });
@@ -104,16 +102,6 @@ class VideosSubPage {
       //Tilraun til að loka vídeóið innan í div, upp á að geta notað position
       newVideoDiv.appendChild(newVideo);
       this.container.appendChild(newVideoDiv);
-
-      /*
-      const newPauseDiv = document.createElement('div');
-      newPauseDiv.classList.add('mainvideo__pauseImg');
-      const pauseImg = document.createElement('img');
-      //pauseImg.classList.add('mainvideo__pauseImg');
-      pauseImg.src = './images/play.svg';
-      newPauseDiv.appendChild(pauseImg);
-      newVideo.appendChild(newPauseDiv);
-      */
 
       const newControlDiv = document.createElement('div');
       newControlDiv.classList.add('controls');
