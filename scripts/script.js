@@ -61,7 +61,7 @@ class VideosMainPage {
         resolve(JSON.parse(this.response));
       };
       xhr.onerror = reject;
-      };
+      
       xhr.open('GET', 'videos.json');
       xhr.send();
     });
