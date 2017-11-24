@@ -23,12 +23,6 @@ class VideosSubPage {
           }
         }
         if (!foundVideo) {
-          // Ekkert vídeó með þessu id fannst. Ath. að við erum bara að gera
-          // eitt hérna: Lesa úr JSON skrá. Ef það gekk þá skilum við
-          // resolve, jafnvel þó vídeóið hafi ekki fundist í skránni.
-          // Við þurfum þ.afl. að bregðast við því *annars staðar* ef
-          // við gátum opnað JSON en fundum ekkert vídeó með þessu ID.
-          // Gerum það í display().
           resolve(null);
         }
       };
@@ -38,15 +32,9 @@ class VideosSubPage {
     });
   }
 
-  // Aðalfall til að birta myndband ef það finnst
-  // Inntak er source á vídeói
-  // HD: Breytti aðeins. Við þurfum að birta titil, poster ofl.,
-  // svo ef þetta er aðalfallið verður src að vera ekki bara
-  // slóðin á .mp4 skrána, heldur video hlutur með allar þessar upplýsingar.
   display(src) {
     if (!src) {
       this.displayerror();
-      // Viljum við hætta hér með "return;" ?
     } else {
       // Skellum upp elementum með myndbandinu:
       const newHeader = document.createElement('h1');
@@ -64,7 +52,6 @@ class VideosSubPage {
 
       const newVideo = document.createElement('video');
       newVideo.classList.add('mainvideo');
-
       newVideo.poster = src.poster;
 
       const newSource = document.createElement('source');
@@ -72,34 +59,31 @@ class VideosSubPage {
       newSource.src = src.video;
       newVideo.appendChild(newSource);
 
-      const pauseDiv = document.createElement('div');
-      pauseDiv.classList.add('--greyedout');
-      const pauseImg = document.createElement('img');
+      const overlayDiv = document.createElement('div');
+      overlayDiv.classList.add('overlay');
+      overlayDiv.classList.add('overlay--grey');
 
+      const pauseImg = document.createElement('img');
       pauseImg.classList.add('overlay__play');
       pauseImg.src = './images/play.svg';
-      pauseDiv.appendChild(pauseImg);
-      newVideoDiv.appendChild(pauseDiv);
-      //newVideoDiv.appendChild(pauseImg);
-
-
+      overlayDiv.appendChild(pauseImg);
+      newVideoDiv.appendChild(overlayDiv);
 
       pauseImg.addEventListener('click', () => {
         if (newVideo.paused) {
           pauseImg.classList.add('--hidden');
-          pauseDiv.classList.remove('--greyedout');
+          overlayDiv.classList.remove('overlay--grey');
           newVideo.play();
           newButtonPlayImage.src = './images/pause.svg';
 
         } else {
           newVideo.pause();
           pauseImg.classList.remove('--hidden');
-          pauseDiv.classList.add('--greyedout');
+          overlayDiv.classList.add('overlay--grey');
           newButtonPlayImage.src = './images/play.svg';
         }
       });
 
-      //Tilraun til að loka vídeóið innan í div, upp á að geta notað position
       newVideoDiv.appendChild(newVideo);
       this.container.appendChild(newVideoDiv);
 
@@ -135,11 +119,15 @@ class VideosSubPage {
         if (newVideo.paused) {
           newButtonPlayImage.src = './images/pause.svg';
           newVideo.play();
+          overlayDiv.classList.remove('overlay--grey');
           pauseImg.classList.add('--hidden');
+
         } else {
           newButtonPlayImage.src = './images/play.svg';
           newVideo.pause();
           pauseImg.classList.remove('--hidden');
+          overlayDiv.classList.add('overlay--grey');
+
         }
       });
 
