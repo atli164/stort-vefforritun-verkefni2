@@ -86,7 +86,7 @@ class VideosMainPage {
   createVideoElement(id, title, dur, age, poster) {
     const newbox = document.createElement('a');
     newbox.classList.add('videobox');
-    newbox.href = '/video.html?id='.concat(id.toString());
+    newbox.href = 'video.html?id='.concat(id.toString());
     const thumb = document.createElement('img');
     thumb.classList.add('videobox__img');
     thumb.src = poster;
