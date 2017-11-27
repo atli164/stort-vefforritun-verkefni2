@@ -4,9 +4,7 @@
 
 ### Núna
 
-* Samræma öll HTML komment við raunverulega virkni
-* Klára eslinting
-  * Finna út úr fat arrow promise
+* Finna út úr fat arrow promise
 
 ## Keyrsla
 
