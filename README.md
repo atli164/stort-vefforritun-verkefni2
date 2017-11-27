@@ -1,10 +1,10 @@
 # stort-vefforritun-verkefni2
 
-## TODO:
+## Höfundar
 
-### Núna
+Atli Fannar Franklín, aff6@hi.is
 
-* Finna út úr fat arrow promise
+Hjalti Daníelsson, hjd1@hi.is
 
 ## Keyrsla
 
