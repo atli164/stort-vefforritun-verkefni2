@@ -197,7 +197,6 @@ class VideosSubPage {
     backDiv.classList.add('backdiv');
     const backlink = document.createElement('a');
     backlink.classList.add('backlink');
-    backlink.href = ('index.html');
     backlink.innerHTML = 'Til baka';
     backDiv.appendChild(backlink);
     this.container.appendChild(backDiv);
