@@ -211,6 +211,6 @@ document.addEventListener('DOMContentLoaded', () => {
       video.display(result);
     })
     .catch(() => {
-      // TODO: gera eitthvað hér
+        displayerror();
     });
 });
