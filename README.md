@@ -6,9 +6,9 @@
 
 * Samræma öll HTML komment við raunverulega virkni
 * Klára stylelinting
-  * Bæta við klasa  img svo ekki þurfi img selector
+    * Bæta við klasa  img svo ekki þurfi img selector
 * Klára eslinting
-  * Finna út úr fat arrow promise
+    * Finna út úr fat arrow promise
 
 ## Keyrsla
 
