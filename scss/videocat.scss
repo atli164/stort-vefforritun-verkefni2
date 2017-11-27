@@ -14,15 +14,15 @@
   }
 
   @media (max-width: 500px) {
+    margin-bottom: 1em;
     flex-wrap: wrap;
     flex-direction: column;
-    margin-bottom: 1em;
   }
 }
 
 .categoryerror {
-    padding-top: 2em;
-    font-family: "open sans", sans-serif;
-    font-size: 1.2em;
-    text-align: center;
+  padding-top: 2em;
+  font-family: "open sans", sans-serif;
+  font-size: 1.2em;
+  text-align: center;
 }

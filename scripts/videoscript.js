@@ -11,7 +11,7 @@ class VideosSubPage {
       const xhr = new XMLHttpRequest();
       // TODO: Binda þetta einhvernveginn svo skipta út megi
       // function () fyrir () =>, ef það er gert núna breakar allt
-      xhr.onload = function () {
+      xhr.onload = (function () {
         const response = JSON.parse(this.response);
         const videoArray = response.videos;
         for (let i = 0; i < videoArray.length; i += 1) {
@@ -23,7 +23,7 @@ class VideosSubPage {
         if (!foundVideo) {
           resolve(null);
         }
-      };
+      });
       xhr.onerror = reject;
       xhr.open('GET', 'videos.json');
       xhr.send();

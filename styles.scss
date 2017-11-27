@@ -14,17 +14,15 @@ html { /* stylelint-disable-line */
   font-size: 16px;
   line-height: 1.5;
   color: #fff;
-  background-color: #333333;
-
-
+  background-color: #333;
 }
 
 h1, h2 { /* stylelint-disable-line */
   font-family: Roboto, sans-serif;
 }
 
-h1 {
-    text-align: center;
+h1 { /* stylelint-disable-line */
+  text-align: center;
 }
 
 .title {

@@ -15,10 +15,8 @@
   &__title {
     margin-top: 0.5em;
     overflow: hidden;
-    font-weight: bold;
-    //text-overflow: clip;
     overflow-wrap: break-word;
-    //white-space: nowrap;
+    font-weight: bold;
   }
 
   &__time {
@@ -32,9 +30,9 @@
   }
 
   @media only screen and (max-width: 500px) {
-    flex-direction: column;
     margin: 0 auto;
     margin-bottom: 1.5em;
+    flex-direction: column;
 
     &__img {
       max-width: 100%;

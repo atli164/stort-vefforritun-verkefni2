@@ -1,45 +1,45 @@
 .mainvideodiv {
+  position: relative;
   display: table;
   width: 100%;
   margin: 0 auto;
-  position: relative;
   margin-bottom: 1em;
 }
 
 .mainvideo {
+  position: relative;
   width: 100%;
   margin: 0 auto;
-  position: relative;
 }
 
 .overlay {
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto auto;
-    z-index:1;
-    background-color: rgba(0,0,0,0.0);
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  background-color: rgba(0, 0, 0, 0);
 }
 
 .overlay--grey {
-    background-color: rgba(0,0,0,0.2);
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 .overlay__play {
-  display: inline-block;
   position: absolute;
   top: 0;
+  right: 0;
   bottom: 0;
   left: 0;
-  right: 0;
-  margin: auto auto;
+  z-index: 2;
+  display: inline-block;
   width: 10%;
   height: auto;
-  z-index: 2;
+  margin: auto;
   background-size: contain;
 }
 
@@ -48,6 +48,6 @@
 }
 
 .videoerror {
-     text-align: center;
-     font-size: 1.3em;
+  font-size: 1.3em;
+  text-align: center;
 }
