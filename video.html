@@ -13,13 +13,17 @@
       Strúktúr á síðu ef myndband finnst:
 
       <h1 class="title">titill</h1>
-      <video class="mainvideo">
-        <source class="videosource">
-        <img src="... play takki hér" class="overlay__play">
-      </video>
+      <div class=mainvideodiv>
+        <div class="overlay overlay--grey">
+          <img src="..." class="overlay__play">
+        </div>
+        <video class="mainvideo" poster="...">
+          <source class="videosource" src="...">
+        </video>
+      </div>
       <div class="controls">
         <button type="button" id="rewind">
-          <img src="...">
+          <img src="..." class="controls__button__img">
         </button>
         Eins fyrir hina takkana...
         ids eru:
@@ -29,7 +33,9 @@
         fullscreen
         skip
       </div>
-      s.s. hér eru imgin fyrir takkana
+      <div class="backdiv">
+        <a class="backlink" href="/index.html">Til baka</a>
+      </a>
 
       Ef ekkert finnst:
 
