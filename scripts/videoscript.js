@@ -84,8 +84,8 @@ class VideosSubPage {
       newControlDiv.appendChild(newButtonRewind);
 
       newButtonRewind.addEventListener('click', () => {
-        const currentTime = newVideo.currentTime;
-        if (currentTime <= 3) {
+        const { currentTime: curTime } = newVideo;
+        if (curTime <= 3) {
           newVideo.currentTime = 0;
         } else {
           newVideo.currentTime -= 3;
