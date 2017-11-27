@@ -4,8 +4,6 @@ class VideosSubPage {
     [, this.id] = window.location.href.split('?id=');
   }
 
-  // Einhverskonar startup fall
-  // Má copya úr aðalskjali þegar það er til
   load() {
     const videoID = this.id;
     let foundVideo = false;
@@ -36,16 +34,11 @@ class VideosSubPage {
     if (!src) {
       this.displayerror();
     } else {
-      // Skellum upp elementum með myndbandinu:
       const newHeader = document.createElement('h1');
       newHeader.classList.add('title');
       newHeader.appendChild(document.createTextNode(src.title));
       this.container.appendChild(newHeader);
 
-      // Prufa: Gætum þurft að nota position:absolute og :relative til að
-      // z-index virki á play takkann - en þá þurfum við að troða vídeóinu inn
-      // í div svo það eyðileggi ekki fyrir flex flæðinu á öllum öðrum elementum
-      // síðunnar
       const newVideoDiv = document.createElement('div');
       newVideoDiv.classList.add('mainvideodiv');
 
@@ -180,10 +173,6 @@ class VideosSubPage {
       backDiv.classList.add('backdiv');
       const backlink = document.createElement('a');
       backlink.classList.add('backlink');
-      // Gætum notað eftirfarandi, en getum ekki endilega treyst því, þar sem
-      // history í sumum browsers getur líka innihaldið smellina á vídeó takkana.
-      // backlink.href = 'javascript:history.back()');
-      // Notum því einfaldlega þetta í staðinn:
       backlink.href = ('/index.html');
       backlink.innerHTML = 'Til baka';
       backDiv.appendChild(backlink);
@@ -191,8 +180,6 @@ class VideosSubPage {
     }
   }
 
-  // Fall sem birt er ef ekki tekst að ná í videos.json
-  // Er einnig keyrt ef ekki finnst myndband með réttu id
   displayerror() {
     const title = document.createElement('h1');
     title.classList.add('title');
@@ -208,10 +195,6 @@ class VideosSubPage {
     backDiv.classList.add('backdiv');
     const backlink = document.createElement('a');
     backlink.classList.add('backlink');
-    // Gætum notað eftirfarandi, en getum ekki endilega treyst því, þar sem
-    // history í sumum browsers getur líka innihaldið smellina á vídeó takkana.
-    // backlink.href = 'javascript:history.back()');
-    // Notum því einfaldlega þetta í staðinn:
     backlink.href = ('/index.html');
     backlink.innerHTML = 'Til baka';
     backDiv.appendChild(backlink);
