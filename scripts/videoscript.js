@@ -69,6 +69,7 @@ class VideosSubPage {
       newButtonRewind.classList.add('controls__button');
       newButtonRewind.id = 'rewind';
       const newButtonRewindImage = document.createElement('img');
+      newButtonRewindImage.classList.add('controls__button__img');
       newButtonRewindImage.src = './images/back.svg';
       newButtonRewind.appendChild(newButtonRewindImage);
       newControlDiv.appendChild(newButtonRewind);
@@ -86,6 +87,7 @@ class VideosSubPage {
       newButtonPlay.classList.add('controls__button');
       newButtonPlay.id = 'playpause';
       const newButtonPlayImage = document.createElement('img');
+      newButtonPlayImage.classList.add('controls__button__img');
       newButtonPlayImage.src = './images/play.svg';
       newButtonPlay.appendChild(newButtonPlayImage);
       newControlDiv.appendChild(newButtonPlay);
@@ -122,6 +124,7 @@ class VideosSubPage {
       newButtonMute.classList.add('controls__button');
       newButtonMute.id = 'mute';
       const newButtonMuteImage = document.createElement('img');
+      newButtonMuteImage.classList.add('controls__button__img');
       newButtonMuteImage.src = './images/mute.svg';
       newButtonMute.appendChild(newButtonMuteImage);
       newControlDiv.appendChild(newButtonMute);
@@ -134,6 +137,7 @@ class VideosSubPage {
       newButtonFullscreen.classList.add('controls__button');
       newButtonFullscreen.id = 'fullscreen';
       const newButtonFullscreenImage = document.createElement('img');
+      newButtonFullscreenImage.classList.add('controls__button__img');
       newButtonFullscreenImage.src = './images/fullscreen.svg';
       newButtonFullscreen.appendChild(newButtonFullscreenImage);
       newControlDiv.appendChild(newButtonFullscreen);
@@ -151,6 +155,7 @@ class VideosSubPage {
       newButtonSkip.classList.add('controls__button');
       newButtonSkip.id = 'skip';
       const newButtonSkipImage = document.createElement('img');
+      newButtonSkipImage.classList.add('controls__button__img');
       newButtonSkipImage.src = './images/next.svg';
       newButtonSkip.appendChild(newButtonSkipImage);
       newControlDiv.appendChild(newButtonSkip);
@@ -206,5 +211,6 @@ document.addEventListener('DOMContentLoaded', () => {
       video.display(result);
     })
     .catch(() => {
+      // TODO: gera eitthvað hér
     });
 });

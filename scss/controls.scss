@@ -10,8 +10,7 @@
     background: none;
     border: 0 solid #fff;
 
-    img {
-      // TODO: bæta classi á img til að nota það sem selector
+    &__img {
       width: 100%;
       height: 100%;
     }
