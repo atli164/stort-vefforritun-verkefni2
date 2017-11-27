@@ -61,7 +61,7 @@ class VideosMainPage {
         resolve(JSON.parse(this.response));
       };
       xhr.onerror = reject;
-      
+
       xhr.open('GET', 'videos.json');
       xhr.send();
     });
@@ -75,9 +75,9 @@ class VideosMainPage {
   }
 
   // Annað throwaway til að sýna hvernig við hendum gögnum milli falla.
-  proofTwo(parse) {
-    console.log(parse);
-  }
+  // proofTwo(parse) {
+  //  console.log(parse);
+  // }
 
   // Fall sem tekur við created tíma og spýtir út aldursstreng
   parseAge(created) {
@@ -210,18 +210,15 @@ class VideosMainPage {
       this.container.appendChild(catBoxTitle);
       this.container.appendChild(catBox);
     });
-
   }
 
   displayLoadingerror() {
-      const perror = document.createElement('p');
-      perror.classList.add('categoryerror');
-      const errortext = document.createTextNode('Gat ekki hlaðið gögnum');
-      perror.appendChild(errortext);
-      this.container.appendChild(perror);
+    const perror = document.createElement('p');
+    perror.classList.add('categoryerror');
+    const errortext = document.createTextNode('Gat ekki hlaðið gögnum');
+    perror.appendChild(errortext);
+    this.container.appendChild(perror);
   }
-
-
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -233,9 +230,9 @@ document.addEventListener('DOMContentLoaded', () => {
       // console.log(result);
       videos.parse(result);
     })
-    .catch((result) => {
+    .catch(() => {
       videos.displayLoadingerror();
-      //console.log("in catch");
-      //console.log(result);
+      // console.log("in catch");
+      // console.log(result);
     });
 });

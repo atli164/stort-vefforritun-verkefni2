@@ -42,10 +42,10 @@ class VideosSubPage {
       newHeader.appendChild(document.createTextNode(src.title));
       this.container.appendChild(newHeader);
 
-      //Prufa: Gætum þurft að nota position:absolute og :relative til að
-      //z-index virki á play takkann - en þá þurfum við að troða vídeóinu inn
-      //í div svo það eyðileggi ekki fyrir flex flæðinu á öllum öðrum elementum
-      //síðunnar
+      // Prufa: Gætum þurft að nota position:absolute og :relative til að
+      // z-index virki á play takkann - en þá þurfum við að troða vídeóinu inn
+      // í div svo það eyðileggi ekki fyrir flex flæðinu á öllum öðrum elementum
+      // síðunnar
       const newVideoDiv = document.createElement('div');
       newVideoDiv.classList.add('mainvideodiv');
 
@@ -68,21 +68,6 @@ class VideosSubPage {
       pauseImg.src = './images/play.svg';
       overlayDiv.appendChild(pauseImg);
       newVideoDiv.appendChild(overlayDiv);
-
-      pauseImg.addEventListener('click', () => {
-        if (newVideo.paused) {
-          pauseImg.classList.add('--hidden');
-          overlayDiv.classList.remove('overlay--grey');
-          newVideo.play();
-          newButtonPlayImage.src = './images/pause.svg';
-
-        } else {
-          newVideo.pause();
-          pauseImg.classList.remove('--hidden');
-          overlayDiv.classList.add('overlay--grey');
-          newButtonPlayImage.src = './images/play.svg';
-        }
-      });
 
       newVideoDiv.appendChild(newVideo);
       this.container.appendChild(newVideoDiv);
@@ -121,13 +106,25 @@ class VideosSubPage {
           newVideo.play();
           overlayDiv.classList.remove('overlay--grey');
           pauseImg.classList.add('--hidden');
-
         } else {
           newButtonPlayImage.src = './images/play.svg';
           newVideo.pause();
           pauseImg.classList.remove('--hidden');
           overlayDiv.classList.add('overlay--grey');
+        }
+      });
 
+      pauseImg.addEventListener('click', () => {
+        if (newVideo.paused) {
+          pauseImg.classList.add('--hidden');
+          overlayDiv.classList.remove('overlay--grey');
+          newVideo.play();
+          newButtonPlayImage.src = './images/pause.svg';
+        } else {
+          newVideo.pause();
+          pauseImg.classList.remove('--hidden');
+          overlayDiv.classList.add('overlay--grey');
+          newButtonPlayImage.src = './images/play.svg';
         }
       });
 
