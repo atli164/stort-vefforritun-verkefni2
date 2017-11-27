@@ -9,8 +9,6 @@ class VideosSubPage {
     let foundVideo = false;
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
-      // TODO: Binda þetta einhvernveginn svo skipta út megi
-      // function () fyrir () =>, ef það er gert núna breakar allt
       xhr.onload = (function () {
         const response = JSON.parse(this.response);
         const videoArray = response.videos;
@@ -41,7 +39,6 @@ class VideosSubPage {
 
       const newVideoDiv = document.createElement('div');
       newVideoDiv.classList.add('mainvideodiv');
-
 
       const newVideo = document.createElement('video');
       newVideo.classList.add('mainvideo');
@@ -209,10 +206,5 @@ document.addEventListener('DOMContentLoaded', () => {
       video.display(result);
     })
     .catch(() => {
-      // Bregðast við villu hérna.
-      // ATH: Villa virðist koma upp sama hvað, svo ég kommenta út
-      // displayerror fallið þar til við getum leyst þetta - annars
-      // strokar það alltaf allt út af skjánum jafnvel ef vídeóið fannst.
-      // video.displayerror();
     });
 });
